@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>現場AIカルテ - 現場診断・AI処方パッケージ</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- スタイリッシュさを出すため、Noto Sans JPの細字(300)から極太(900)まで読み込む -->
@@ -586,15 +587,21 @@
     <footer class="bg-black text-gray-500 py-12 text-center">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-center items-end mb-6">
-                <!-- フッターもオリジナルアイコンを使用 -->
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7 mr-1.5 text-gray-400 pb-1">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M14 2v6h6" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M10 13l2-3 2 3 3 2-3 2-2 3-2-3-3-2 3-2z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"></path>
+                <!-- SVG Icon: Signal bars turning into AI star -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-3">
+                    <rect x="3" y="14" width="3" height="6" rx="1" fill="#9ca3af"/>
+                    <rect x="8" y="10" width="3" height="10" rx="1" fill="#6b7280"/>
+                    <rect x="13" y="6" width="3" height="14" rx="1" fill="#4b5563"/>
+                    <path d="M18 2L20 6L24 8L20 10L18 14L16 10L12 8L16 6L18 2Z" fill="#0ea5e9"/>
                 </svg>
-                <span class="text-xl tracking-widest text-gray-300 leading-none pt-1">
-                    <span class="font-light">現場</span><span class="font-black px-0.5 tracking-normal">AI</span><span class="font-light">カルテ</span>
-                </span>
+                <div class="flex flex-col leading-none">
+                    <div class="text-[7px] font-black text-gray-500 tracking-[0.2em] uppercase">Analysis & Cure</div>
+                    <div class="text-sm tracking-tighter flex items-baseline">
+                        <span class="font-black text-gray-300">現場</span>
+                        <span class="font-black text-cyan-400 italic ml-0.5">AI</span>
+                        <span class="font-light text-gray-600 ml-0.5">カルテ</span>
+                    </div>
+                </div>
             </div>
             <p class="text-sm">© 2026 AICHI CONSULTING. All rights reserved.</p>
         </div>
