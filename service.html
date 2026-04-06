@@ -3,38 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Flow Design - AI業務フロー設計・DX計画策定サービス</title>
+    <title>現場AIカルテ - 現場診断・AI処方パッケージ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- スタイリッシュさを出すため、Noto Sans JPの細字(300)から極太(900)まで読み込む -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans JP', sans-serif;
             color: #333;
         }
+        /* 白背景用のグラデーション（青〜水色） */
         .gradient-text {
             background: linear-gradient(to right, #2563eb, #06b6d4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .hero-bg {
-            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
+        /* 暗い背景（ヒーローセクション）用のグラデーション */
+        .gradient-text-light {
+            background: linear-gradient(to right, #93c5fd, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         html {
             scroll-behavior: smooth;
-        }
-        .step-line::before {
-            content: '';
-            position: absolute;
-            top: 2rem;
-            bottom: -2rem;
-            left: 1.5rem;
-            width: 2px;
-            background-color: #DBEAFE;
-            z-index: 0;
-        }
-        .step-item:last-child .step-line::before {
-            display: none;
         }
         .dash-anim {
             stroke-dasharray: 6;
@@ -55,25 +47,38 @@
 <body class="bg-gray-50">
 
     <!-- ナビゲーション -->
-    <nav class="bg-white shadow-sm fixed w-full z-50 top-0">
+    <nav class="bg-white/95 backdrop-blur-sm shadow-sm fixed w-full z-50 top-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2">
-                    <!-- AI-Flow Design ロゴ -->
-                    <div class="flex flex-col items-start">
-                        <div class="flex items-center font-black text-2xl text-blue-700 tracking-tighter">
-                            <i data-lucide="cpu" class="w-6 h-6 mr-2 text-blue-600"></i>
-                            AI-Flow Design
-                        </div>
-                        <!-- by AICHI CONSULTING（TOPへのリンク） -->
-                        <a href="./index.html" class="text-[10px] font-bold text-gray-500 tracking-wider uppercase hover:text-blue-600 transition-colors">
-                            by <span class="text-cyan-500">AI</span>CHI CONSULTING
+                    <div class="flex flex-row items-end">
+                        <a href="index.html" class="flex items-center hover:opacity-80 transition-opacity leading-none group mr-3">
+                            <!-- SVG Icon: Signal bars turning into AI star -->
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-4">
+                                <rect x="3" y="14" width="3" height="6" rx="1" fill="#e2e8f0"/>
+                                <rect x="8" y="10" width="3" height="10" rx="1" fill="#cbd5e1"/>
+                                <rect x="13" y="6" width="3" height="14" rx="1" fill="#94a3b8"/>
+                                <path d="M18 2L20 6L24 8L20 10L18 14L16 10L12 8L16 6L18 2Z" fill="#06b6d4"/>
+                            </svg>
+                            <!-- Logo Text -->
+                            <div class="flex flex-col leading-none">
+                                <div class="text-[8px] font-black text-blue-600 tracking-[0.3em] uppercase">Analysis & Cure</div>
+                                <div class="text-lg tracking-tighter flex items-baseline">
+                                    <span class="font-black text-slate-800">現場</span>
+                                    <span class="font-black text-cyan-500 italic ml-0.5">AI</span>
+                                    <span class="font-light text-slate-400 ml-0.5">カルテ</span>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- BY AICHI CONSULTING -->
+                        <a href="index.html" class="hidden sm:block text-[10px] font-bold text-gray-400 tracking-wider uppercase hover:text-blue-600 transition-colors pb-1.5">
+                            by <span class="text-cyan-500 font-black text-[11px]">AI</span>CHI CONSULTING
                         </a>
                     </div>
                 </div>
                 <div>
-                    <a href="#cta" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-bold text-sm transition-colors shadow-md">
-                        無料相談を予約
+                    <a href="#cta" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-full font-bold text-sm transition-colors shadow-md flex items-center">
+                        <i data-lucide="mic" class="w-4 h-4 mr-1.5"></i> 無料の問診へ
                     </a>
                 </div>
             </div>
@@ -81,27 +86,38 @@
     </nav>
 
     <!-- ファーストビュー (Hero) -->
-    <section class="hero-bg pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-[85vh] flex items-center">
-        <div class="max-w-7xl mx-auto text-center">
-            <span class="inline-block py-1 px-4 rounded-full bg-blue-100 text-blue-800 font-bold text-sm mb-6 border border-blue-200 shadow-sm">
-                IT導入・DX化を検討中の経営者・ご担当者様へ
+    <!-- 背景を以前のデータ・分析系画像に設定 -->
+    <section class="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-[85vh] flex items-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2015');">
+        <!-- 色味を調整するためのブルーオーバーレイ -->
+        <div class="absolute inset-0 bg-blue-900/80 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-blue-900/60 to-gray-900/90"></div>
+        
+        <div class="max-w-7xl mx-auto text-center relative z-10 mt-10">
+            <span class="inline-flex items-center py-1.5 px-5 rounded-full bg-blue-500/20 text-blue-100 font-bold text-sm mb-6 border border-blue-400/30 backdrop-blur-md shadow-lg">
+                <i data-lucide="clock" class="w-4 h-4 mr-2"></i> スピード診断・AI導入を検討中の経営者様へ
             </span>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight tracking-tight">
-                失敗しないIT投資は、<br class="hidden md:block" />
-                <span class="gradient-text">「正しい現状分析」と「AIが描く青写真」から。</span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight tracking-tight text-white">
+                失敗しないAI投資は、<br>
+                現場の「健康診断」と<br>
+                <span class="gradient-text-light">「AIが描く処方箋」</span>から。
             </h1>
-            <p class="text-lg md:text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed font-medium">
-                いきなり高額なツールを導入してはいけません。<br />
-                私たちは、貴社の複雑に絡み合った業務を解きほぐし、AIを活用して<strong class="text-blue-600">「To-Be（理想の業務フロー）」</strong>と<strong class="text-blue-600">「具体的な期待効果」</strong>を可視化します。<br />
-                <span class="block mt-2 text-sm md:text-base text-gray-500">※アウトプットは、IT導入補助金などの申請資料としても強力な武器になります。</span>
+            <p class="text-lg md:text-xl text-blue-50 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
+                どこが悪いか分からないのに、いきなり高額なシステム（手術）を導入してはいけません。<br><br>
+                私たちは、貴社の複雑に絡み合った業務をプロの眼で「診断」し、<br class="hidden md:block">
+                最新のAIを活用した<strong class="text-cyan-300">「現場カルテ」</strong>と<strong class="text-cyan-300">「具体的な回復効果（ROI）」</strong>を<br class="hidden md:block">
+                
+                <!-- 黄色を廃止し、シアンブルーのサイバーバッジ＆グロー（発光）エフェクトでスタイリッシュに強調 -->
+                <span class="inline-block mt-2 mb-1 px-4 py-1 bg-cyan-900/40 border border-cyan-400/50 rounded-md text-cyan-300 font-black tracking-widest shadow-[0_0_15px_rgba(6,182,212,0.5)] transform hover:scale-105 transition-all text-xl md:text-2xl mx-1">最短3週間</span> で可視化します。<br><br>
+                
+                <span class="block mt-3 text-sm md:text-base text-blue-200 font-light">※アウトプットは、IT導入補助金などの申請資料としても強力な武器になります。</span>
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#cta" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center flex items-center justify-center">
-                    まずは無料のオンライン相談へ
+                <a href="#cta" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-full font-black text-lg transition-all shadow-[0_0_20px_rgba(37,99,235,0.5)] hover:shadow-[0_0_30px_rgba(37,99,235,0.7)] transform hover:-translate-y-1 text-center flex items-center justify-center">
+                    無料オンライン問診を予約する
                     <i data-lucide="chevron-right" class="w-5 h-5 ml-1"></i>
                 </a>
-                <a href="#output-sample" class="bg-white hover:bg-gray-50 text-blue-600 border-2 border-blue-100 px-8 py-4 rounded-full font-bold text-lg transition-all shadow-sm text-center">
-                    納品物のサンプルを見る
+                <a href="#output-sample" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border-2 border-blue-300/50 px-8 py-4 rounded-full font-bold text-lg transition-all shadow-sm text-center">
+                    『現場AIカルテ』のサンプルを見る
                 </a>
             </div>
         </div>
@@ -112,38 +128,57 @@
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <span class="text-red-500 font-bold tracking-wider text-sm mb-2 block">PROBLEM</span>
-                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">IT導入・DX化を進める前、こんな「壁」にぶつかっていませんか？</h2>
+                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+                    AI導入・DX化を進める前、<br class="md:hidden">こんな「壁」にぶつかっていませんか？
+                </h2>
                 <div class="w-16 h-1 bg-red-500 mx-auto rounded"></div>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-gray-50 border border-gray-200 p-8 rounded-2xl relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-red-400"></div>
-                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-6">
-                        <i data-lucide="help-circle" class="w-6 h-6 text-red-600"></i>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- 課題1 -->
+                <div class="bg-red-50 border border-red-100 p-8 rounded-2xl relative overflow-hidden shadow-sm">
+                    <div class="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-md transform -rotate-3">
+                        <i data-lucide="route-off" class="w-7 h-7 text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-800">何から手を付ければいいか分からない</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        「DXが必要」とは言われるものの、自社のどの業務を、どの順番で、どんなツールを使って効率化すべきか、社内だけで議論しても正解が見えない。
+                    <!-- 診断メタファーをサブタイトルとして配置 -->
+                    <span class="text-xs font-bold text-red-500 mb-1 block tracking-wider">【症状】痛む場所（ボトルネック）が特定できない</span>
+                    <!-- 響きの良かったストレートな見出しをメインに -->
+                    <h3 class="text-xl md:text-2xl font-black mb-4 text-red-700 border-b-2 border-red-200 pb-3 leading-tight">
+                        何から手を付ければ<br>いいか分からない
+                    </h3>
+                    <p class="text-gray-700 text-sm leading-relaxed font-medium">
+                        「DXが必要」とは言われるものの、自社のどの業務を、どの順番で改善すべきか、社内だけで議論しても正解が見えず迷子になっている。
                     </p>
                 </div>
-                <div class="bg-gray-50 border border-gray-200 p-8 rounded-2xl relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-red-400"></div>
-                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-6">
-                        <i data-lucide="calculator" class="w-6 h-6 text-red-600"></i>
+
+                <!-- 課題2 -->
+                <div class="bg-red-50 border border-red-100 p-8 rounded-2xl relative overflow-hidden shadow-sm">
+                    <div class="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-md transform -rotate-3">
+                        <i data-lucide="trending-down" class="w-7 h-7 text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-800">費用対効果（ROI）が説明できない</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        システムの導入見積もりは取ったが、「それで具体的にいくらコストが下がるのか？」の根拠が弱く、経営陣の稟議が通らない。
+                    <!-- 診断メタファーをサブタイトルとして配置 -->
+                    <span class="text-xs font-bold text-red-500 mb-1 block tracking-wider">【症状】治療（AI導入）の効果が信じられない</span>
+                    <!-- 響きの良かったストレートな見出しをメインに -->
+                    <h3 class="text-xl md:text-2xl font-black mb-4 text-red-700 border-b-2 border-red-200 pb-3 leading-tight">
+                        費用対効果（ROI）が<br>明確に説明できない
+                    </h3>
+                    <p class="text-gray-700 text-sm leading-relaxed font-medium">
+                        システムの導入見積もりは取ったが、「それで具体的にいくらコストが下がるのか？売上が上がるのか？」の根拠が弱く、経営陣の投資稟議が通らない。
                     </p>
                 </div>
-                <div class="bg-gray-50 border border-gray-200 p-8 rounded-2xl relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-red-400"></div>
-                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-6">
-                        <i data-lucide="file-text" class="w-6 h-6 text-red-600"></i>
+
+                <!-- 課題3 -->
+                <div class="bg-red-50 border border-red-100 p-8 rounded-2xl relative overflow-hidden shadow-sm">
+                    <div class="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-md transform -rotate-3">
+                        <i data-lucide="file-x" class="w-7 h-7 text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-800">補助金申請の事業計画が書けない</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
+                    <!-- 診断メタファーをサブタイトルとして配置 -->
+                    <span class="text-xs font-bold text-red-500 mb-1 block tracking-wider">【症状】審査員に出す「診断書」が作れない</span>
+                    <!-- 響きの良かったストレートな見出しをメインに -->
+                    <h3 class="text-xl md:text-2xl font-black mb-4 text-red-700 border-b-2 border-red-200 pb-3 leading-tight">
+                        補助金申請の<br>事業計画が書けない
+                    </h3>
+                    <p class="text-gray-700 text-sm leading-relaxed font-medium">
                         IT導入補助金などを活用したいが、「導入後の労働生産性の向上」や「具体的な業務改善フロー」を論理的にドキュメント化するノウハウと時間がない。
                     </p>
                 </div>
@@ -152,153 +187,137 @@
     </section>
 
     <!-- 具体的なアウトプットイメージ (Output Sample) -->
-    <section id="output-sample" class="py-24 bg-blue-50 px-4 sm:px-6 lg:px-8 border-t border-blue-100">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
+    <section id="output-sample" class="py-24 bg-blue-50 px-4 sm:px-6 lg:px-8 border-t border-blue-100 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#3b82f6 1px, transparent 1px); background-size: 20px 20px;"></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-10">
                 <span class="text-blue-600 font-bold tracking-wider text-sm mb-2 block">OUTPUT SAMPLE</span>
-                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">納品される「DX推進計画書」の具体例</h2>
+                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">納品される『現場カルテ ＆ AI処方箋』の具体例</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                    複雑に絡み合った現場の「リアルな業務」を徹底的に解きほぐし、AIを活用した無駄のないプロセスへと再設計します。<br>
+                    アナログ依存の現場の「病状」を徹底的に診察し、AIを活用した無駄のないプロセスへと再設計。貴社の現場にバシッと「マッチ（適合）」する処方箋を作成します。<br>
                     <span class="text-sm bg-blue-100 text-blue-800 px-3 py-1.5 rounded-full inline-block mt-3 font-bold border border-blue-200">
                         【ケーススタディ】 製造業における 受発注〜生産指示プロセス
                     </span>
                 </p>
             </div>
 
+            <!-- ★ボリューム感の伝達注記★ -->
+            <div class="bg-white border-l-4 border-blue-400 p-5 mb-8 rounded-r-xl shadow-sm max-w-5xl mx-auto flex items-start">
+                <i data-lucide="info" class="w-6 h-6 text-blue-600 mr-3 flex-shrink-0 mt-0.5"></i>
+                <div>
+                    <h4 class="text-gray-900 font-black text-base mb-1">※実際の納品物は数百プロセスに及ぶ「詳細な現場カルテ（Excel等）」となります</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        以下の図解は概要を簡略化したイメージです。実際には、<strong class="bg-blue-50 px-1 border-b border-blue-200">全業務を網羅した膨大なフロー定義書とROI算出表</strong>を『現場カルテ』として納品いたします。<br>
+                        <a href="#cta" class="inline-flex items-center mt-2 text-blue-600 font-bold hover:underline">
+                            実際の詳細な現場カルテは無料問診・資料請求にてご確認いただけます <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
             <div class="bg-white rounded-3xl shadow-xl border border-gray-200 overflow-hidden mb-8">
                 
-                <!-- As-Is (現状)：複雑なカオス状態 -->
-                <div class="p-6 md:p-10 bg-gray-50 relative border-b border-gray-200">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                <!-- As-Is (現状)：精密検査で判明したアナログ業務の「病状」 -->
+                <div class="p-6 md:p-10 bg-gray-50 relative border-b border-gray-200 overflow-hidden">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 relative z-10">
                         <div>
                             <h3 class="text-2xl font-black text-gray-800 flex items-center mb-2">
-                                <span class="bg-gray-600 text-white text-sm px-3 py-1 rounded shadow-sm mr-3">Before (As-Is)</span>
+                                <span class="bg-gray-600 text-white text-sm px-3 py-1 rounded shadow-sm mr-3 font-medium">現場カルテ (As-Is)</span>
                                 アナログ依存と二重入力の連続
                             </h3>
-                            <p class="text-gray-600 text-sm">FAXでの受注、Excelへの手入力、紙の作業指示書と図面の持ち歩き。現場の進捗が事務所から見えない状態。</p>
                         </div>
                         <span class="text-red-500 text-sm font-bold flex items-center bg-red-50 px-3 py-2 rounded-lg border border-red-100"><i data-lucide="alert-triangle" class="w-4 h-4 mr-2"></i> 転記ミス・進捗のブラックボックス化</span>
                     </div>
                     
                     <!-- As-Is フロー図 (SVG: 複雑版) -->
-                    <div class="bg-white p-4 rounded-xl border border-gray-300 shadow-sm h-[400px] relative w-full overflow-x-auto">
+                    <div class="bg-white p-4 rounded-xl border border-gray-300 shadow-sm h-[320px] md:h-[400px] relative w-full overflow-x-auto z-10">
                         <svg viewBox="0 0 800 350" class="min-w-[800px] h-full overflow-visible">
                             <defs>
                                 <marker id="arrow-red-asis" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#EF4444" /></marker>
                                 <marker id="arrow-gray-asis" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9CA3AF" /></marker>
                             </defs>
-
                             <rect x="0" y="20" width="800" height="100" fill="#F9FAFB" />
                             <rect x="0" y="120" width="800" height="110" fill="#F3F4F6" />
                             <rect x="0" y="230" width="800" height="100" fill="#F9FAFB" />
-                            
                             <text x="10" y="75" fill="#6B7280" font-size="12" font-weight="bold" transform="rotate(-90, 10, 75)">顧客</text>
                             <text x="10" y="180" fill="#6B7280" font-size="12" font-weight="bold" transform="rotate(-90, 10, 180)">営業・事務</text>
                             <text x="10" y="285" fill="#6B7280" font-size="12" font-weight="bold" transform="rotate(-90, 10, 285)">製造現場</text>
-
                             <rect x="50" y="50" width="90" height="40" rx="4" fill="#fff" stroke="#9CA3AF" stroke-width="1" />
                             <text x="95" y="70" fill="#4B5563" font-size="10" text-anchor="middle">注文 (FAX/電話)</text>
-
                             <rect x="180" y="140" width="100" height="40" rx="4" fill="#FEE2E2" stroke="#EF4444" stroke-width="2" />
                             <text x="230" y="155" fill="#991B1B" font-size="11" font-weight="bold" text-anchor="middle">Excel台帳へ手入力</text>
-
                             <rect x="320" y="130" width="100" height="60" rx="4" fill="#FEE2E2" stroke="#EF4444" stroke-width="2" />
                             <text x="370" y="150" fill="#991B1B" font-size="11" font-weight="bold" text-anchor="middle">作業指示書の作成</text>
                             <text x="370" y="165" fill="#B91C1C" font-size="9" text-anchor="middle">(紙に印刷)</text>
-                            <text x="370" y="178" fill="#B91C1C" font-size="9" text-anchor="middle">過去図面を探す</text>
-
                             <rect x="460" y="140" width="100" height="40" rx="4" fill="#fff" stroke="#9CA3AF" stroke-width="1" />
                             <text x="510" y="155" fill="#4B5563" font-size="11" text-anchor="middle">現場へ手渡し</text>
-
                             <rect x="460" y="250" width="100" height="50" rx="4" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2" />
                             <text x="510" y="270" fill="#92400E" font-size="11" font-weight="bold" text-anchor="middle">紙を見て製造</text>
-
                             <rect x="600" y="250" width="100" height="50" rx="4" fill="#FEE2E2" stroke="#EF4444" stroke-width="2" />
                             <text x="650" y="265" fill="#991B1B" font-size="11" font-weight="bold" text-anchor="middle">日報・実績を手書き</text>
-
                             <path d="M 140 70 L 160 70 L 160 160 L 180 160" fill="none" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow-gray-asis)" />
-                            
-                            <!-- 手入力エラー -->
                             <path d="M 280 160 L 320 160" fill="none" stroke="#EF4444" stroke-width="2" marker-end="url(#arrow-red-asis)" />
                             <circle cx="300" cy="160" r="12" fill="#EF4444" class="blink-alert" />
                             <text x="300" y="164" fill="white" font-size="12" font-weight="bold" text-anchor="middle">!</text>
                             <text x="300" y="185" fill="#EF4444" font-size="10" font-weight="bold" text-anchor="middle">入力ミス</text>
-
                             <path d="M 420 160 L 460 160" fill="none" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow-gray-asis)" />
-                            
                             <path d="M 510 180 L 510 250" fill="none" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow-gray-asis)" />
-                            
                             <path d="M 560 275 L 600 275" fill="none" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow-gray-asis)" />
-                            
-                            <!-- 日報から事務への再入力ループ -->
                             <path d="M 650 250 Q 650 180, 560 180" fill="none" stroke="#EF4444" stroke-width="2" stroke-dasharray="4" marker-end="url(#arrow-red-asis)" />
                             <circle cx="600" cy="200" r="12" fill="#EF4444" class="blink-alert" />
                             <text x="600" y="204" fill="white" font-size="12" font-weight="bold" text-anchor="middle">!</text>
                             <text x="600" y="225" fill="#EF4444" font-size="10" font-weight="bold" text-anchor="middle">事務が再入力</text>
-
-                            <rect x="680" y="50" width="100" height="70" rx="4" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="2" />
-                            <text x="730" y="70" fill="#9CA3AF" font-size="10" text-anchor="middle">見えないコスト大</text>
-                            <text x="730" y="85" fill="#EF4444" font-size="10" font-weight="bold" text-anchor="middle">・進捗確認の電話</text>
-                            <text x="730" y="100" fill="#EF4444" font-size="10" font-weight="bold" text-anchor="middle">・図面探しの時間</text>
                         </svg>
                     </div>
                 </div>
 
-                <!-- To-Be (理想)：整理された直線ルート -->
-                <div class="p-6 md:p-10 bg-blue-900 relative overflow-hidden">
-                    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#60A5FA 1px, transparent 1px); background-size: 20px 20px;"></div>
+                <!-- To-Be (理想)：AIとSaaSを活用した根本治療プラン -->
+                <div class="p-6 md:p-10 bg-blue-900 relative overflow-hidden border-t border-blue-800">
+                    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#60a5fa 1px, transparent 1px); background-size: 20px 20px;"></div>
                     
                     <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 relative z-10">
                         <div>
                             <h3 class="text-2xl font-black text-white flex items-center mb-2">
-                                <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded shadow-sm mr-3">After (To-Be)</span>
-                                AI・SaaSを活用した「一本の線」
+                                <span class="bg-blue-500 text-white text-sm px-3 py-1 rounded shadow-sm mr-3 font-medium">AI処方箋 (To-Be)</span>
+                                AIとSaaSを活用した「根本治療プラン」
                             </h3>
-                            <p class="text-blue-100 text-sm">システムが自動でデータを連携。現場はタブレットで図面と指示を確認し、ペーパーレスで実績入力。</p>
                         </div>
-                        <span class="text-cyan-300 text-sm font-bold flex items-center bg-cyan-900/50 px-3 py-2 rounded-lg border border-cyan-800"><i data-lucide="zap" class="w-4 h-4 mr-2 text-cyan-400"></i> API連携・自動化</span>
+                        <span class="text-cyan-300 text-sm font-bold flex items-center bg-cyan-900/50 px-3 py-2 rounded-lg border border-cyan-800"><i data-lucide="zap" class="w-4 h-4 mr-2 text-cyan-400"></i> AI適合・自動化</span>
                     </div>
 
                     <!-- To-Be フロー図 (SVG: シンプル・直線版) -->
-                    <div class="bg-gray-800/80 p-4 rounded-xl border border-blue-500/30 shadow-2xl h-[280px] relative w-full overflow-x-auto z-10 backdrop-blur-sm">
+                    <div class="bg-gray-800/80 p-4 rounded-xl border border-blue-500/30 shadow-2xl h-[240px] md:h-[280px] relative w-full overflow-x-auto z-10 backdrop-blur-sm">
                         <svg viewBox="0 0 800 240" class="min-w-[800px] h-full overflow-visible">
                             <defs>
-                                <marker id="arrow-blue-tobe" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3B82F6" /></marker>
+                                <marker id="arrow-blue-tobe" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6" /></marker>
                                 <marker id="arrow-cyan-tobe" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#06B6D4" /></marker>
                             </defs>
-
                             <rect x="50" y="80" width="100" height="80" rx="8" fill="#1F2937" stroke="#4B5563" stroke-width="2" />
                             <text x="100" y="110" fill="#9CA3AF" font-size="12" text-anchor="middle">あらゆる注文</text>
                             <text x="100" y="130" fill="#D1D5DB" font-size="10" text-anchor="middle">FAX / WebEDI</text>
-
-                            <rect x="230" y="70" width="120" height="100" rx="12" fill="#1E3A8A" stroke="#3B82F6" stroke-width="3" />
-                            <circle cx="230" cy="70" r="4" fill="#60A5FA" class="blink-alert" />
-                            <text x="290" y="105" fill="#93C5FD" font-size="14" font-weight="bold" text-anchor="middle">AI-OCR / 受注API</text>
-                            <text x="290" y="125" fill="#BFDBFE" font-size="10" text-anchor="middle">注文データを自動化</text>
-
-                            <rect x="430" y="80" width="120" height="80" rx="8" fill="#064E3B" stroke="#10B981" stroke-width="2" />
-                            <text x="490" y="115" fill="#34D399" font-size="14" font-weight="bold" text-anchor="middle">生産管理SaaS</text>
-                            <text x="490" y="135" fill="#6EE7B7" font-size="10" text-anchor="middle">図面紐付け・自動展開</text>
-
+                            <rect x="230" y="70" width="120" height="100" rx="12" fill="#1e3a8a" stroke="#3b82f6" stroke-width="3" />
+                            <circle cx="230" cy="70" r="4" fill="#60a5fa" class="blink-alert" />
+                            <text x="290" y="105" fill="#bfdbfe" font-size="14" font-weight="bold" text-anchor="middle">AI-OCR / 受注API</text>
+                            <text x="290" y="125" fill="#93c5fd" font-size="10" text-anchor="middle">貴社の現場にマッチするAI</text>
+                            <rect x="430" y="80" width="120" height="80" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="2" />
+                            <text x="490" y="115" fill="#34d399" font-size="14" font-weight="bold" text-anchor="middle">生産管理SaaS</text>
+                            <text x="490" y="135" fill="#6ee7b7" font-size="10" text-anchor="middle">データ連携・自動展開</text>
                             <rect x="630" y="80" width="100" height="80" rx="8" fill="#374151" stroke="#6B7280" stroke-width="2" />
                             <text x="680" y="115" fill="#D1D5DB" font-size="14" font-weight="bold" text-anchor="middle">現場タブレット</text>
                             <text x="680" y="135" fill="#9CA3AF" font-size="10" text-anchor="middle">ペーパーレス実績入力</text>
-
-                            <path d="M 150 120 L 230 120" fill="none" stroke="#3B82F6" stroke-width="3" class="dash-anim" marker-end="url(#arrow-blue-tobe)" />
-                            
+                            <path d="M 150 120 L 230 120" fill="none" stroke="#3b82f6" stroke-width="3" class="dash-anim" marker-end="url(#arrow-blue-tobe)" />
                             <path d="M 350 120 L 430 120" fill="none" stroke="#06B6D4" stroke-width="4" class="dash-anim" marker-end="url(#arrow-cyan-tobe)" />
                             <text x="390" y="110" fill="#22D3EE" font-size="11" font-weight="bold" text-anchor="middle">API連携</text>
-
-                            <path d="M 550 120 L 630 120" fill="none" stroke="#10B981" stroke-width="3" class="dash-anim" marker-end="url(#arrow-blue-tobe)" />
-                            
+                            <path d="M 550 120 L 630 120" fill="none" stroke="#10b981" stroke-width="3" class="dash-anim" marker-end="url(#arrow-blue-tobe)" />
                         </svg>
                     </div>
                 </div>
 
-                <!-- ROI シミュレーション (効果測定) -->
-                <div class="bg-gray-900 p-8 text-white border-t border-gray-800">
+                <!-- ROI シミュレーション (効果測定) と 根拠の明記 -->
+                <div class="bg-gray-900 p-6 md:p-8 text-white border-t border-gray-800">
                     <h4 class="text-lg font-bold mb-6 flex items-center text-cyan-400">
-                        <i data-lucide="bar-chart-3" class="w-5 h-5 mr-2"></i> 上記フロー改善による期待効果（ROI）シミュレーション
+                        <i data-lucide="bar-chart-3" class="w-5 h-5 mr-2"></i> 上記治療（AI処方）による期待回復効果（ROI）シミュレーション
                     </h4>
                     <div class="grid sm:grid-cols-3 gap-6 text-center mb-6">
                         <div class="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-inner">
@@ -324,66 +343,79 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-center text-sm text-gray-300 bg-gray-800/80 border border-gray-700 py-4 rounded-xl flex items-center justify-center">
-                        <i data-lucide="info" class="w-5 h-5 mr-2 text-yellow-400"></i>
-                        これらの定量的なデータとフロー図は、稟議を通すための強力な根拠資料になります。
-                    </p>
+
+                    <!-- ★根拠の明記★ -->
+                    <div class="bg-gray-800 border border-gray-700 p-5 rounded-xl text-left mt-4 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-cyan-500"></div>
+                        <h5 class="text-cyan-400 font-bold text-sm mb-2 flex items-center">
+                            <i data-lucide="check-circle" class="w-4 h-4 mr-1"></i>徹底した問診に基づく「リアルな算出根拠」
+                        </h5>
+                        <p class="text-gray-300 text-xs md:text-sm leading-relaxed">
+                            このシミュレーションは絵空事ではありません。貴社の実際の「担当者の時給水準」「月間の処理件数」等の<strong class="text-white">実データを問診で取得</strong>し、処方するAIシステムの実績値（削減率）を掛け合わせて算出・明記します。これがそのまま、IT導入補助金等の<strong class="text-white">「労働生産性向上の根拠」</strong>として活用できます。
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 提供ステップ (Delivery Steps - 役割分担を明確化) -->
-    <section class="py-24 bg-white px-4 sm:px-6 lg:px-8">
+    <!-- 提供ステップ (Delivery Steps) -->
+    <section class="py-24 bg-white px-4 sm:px-6 lg:px-8 border-t border-gray-100">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
                 <span class="text-blue-600 font-bold tracking-wider text-sm mb-2 block">WORK PROCESS & ROLE</span>
-                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">丸投げはできません。<br class="hidden md:block"/>共に「最高の実践計画」を創る4ステップ</h2>
+                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">丸投げはできません。<br class="hidden md:block"/>共に「現場にバシッとマッチするAI処方」を創る4ステップ</h2>
                 <p class="text-gray-600 leading-relaxed mt-4 max-w-2xl mx-auto">
-                    コンサルティングの成功には、現場を知る貴社のご協力が不可欠です。<br>私たちプロの「設計力」と、貴社の「現場の知見」を掛け合わせ、わずか3〜4週間で納品まで駆け抜けます。
+                    本プロジェクトの実効性を高めるには、現場を知る貴社のご協力が不可欠です。<br>業務設計の専門チームと、貴社の現場の知見を掛け合わせ、<strong class="text-blue-600 font-bold">最短3週間で診断報告</strong>まで駆け抜けます。
                 </p>
             </div>
 
-            <div class="relative space-y-8 pl-4 md:pl-0">
+            <!-- ★スマホ対応済みのタイムライン（医疗メタファー）★ -->
+            <div class="relative space-y-6 md:space-y-12">
+                <!-- PC用縦線 -->
+                <div class="hidden md:block absolute left-6 top-8 bottom-8 w-0.5 bg-blue-100 z-0"></div>
+
                 <!-- Step 1 -->
-                <div class="step-item relative flex items-start step-line">
-                    <div class="flex-shrink-0 relative z-10 flex items-center justify-center w-12 h-12 bg-blue-600 text-white font-black text-xl rounded-full shadow-lg border-4 border-white -ml-6 md:ml-0">1</div>
-                    <div class="ml-6 bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-8 w-full shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex flex-wrap items-center justify-between mb-4 gap-2 border-b border-gray-200 pb-4">
+                <div class="relative flex flex-col md:flex-row items-start">
+                    <div class="hidden md:flex flex-shrink-0 relative z-10 items-center justify-center w-12 h-12 bg-blue-600 text-white font-black text-xl rounded-full shadow-lg border-4 border-white">1</div>
+                    <div class="md:ml-8 bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-8 w-full shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2 border-b border-gray-200 pb-4">
                             <h3 class="text-xl font-bold text-gray-900 flex items-center">
-                                <i data-lucide="mic" class="w-5 h-5 mr-2 text-blue-600"></i>
-                                現状業務の棚卸しと課題抽出
+                                <span class="md:hidden flex items-center justify-center w-8 h-8 bg-blue-600 text-white font-black text-sm rounded-full mr-3">1</span>
+                                <i data-lucide="microscope" class="hidden md:block w-5 h-5 mr-2 text-blue-600"></i>
+                                問診と精密検査（ヒアリング・現状可視化）
                             </h3>
-                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Week 1</span>
+                            <span class="self-start md:self-auto bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Week 1</span>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-6 mt-4">
+                        <div class="grid md:grid-cols-2 gap-4 md:gap-6 mt-4">
                             <div class="bg-white p-5 rounded-xl border-l-4 border-blue-500 shadow-sm">
-                                <h4 class="font-bold text-blue-800 text-sm mb-2 flex items-center"><i data-lucide="user-check" class="w-4 h-4 mr-1"></i>弊社の作業</h4>
-                                <p class="text-gray-600 text-sm">各部門へのオンラインヒアリングを実施し、複雑な現状の業務フロー（As-Is）を図解化。ボトルネックとなっている作業を特定します。</p>
+                                <h4 class="font-bold text-blue-800 text-sm mb-2 flex items-center"><i data-lucide="user-check" class="w-4 h-4 mr-1"></i>専門チームの作業</h4>
+                                <p class="text-gray-600 text-sm">各部門へのオンラインヒアリングを実施し、複雑な現状の業務フローを図解化。痛む場所（ボトルネック）を特定します。</p>
                             </div>
                             <div class="bg-white p-5 rounded-xl border-l-4 border-orange-400 shadow-sm">
                                 <h4 class="font-bold text-orange-700 text-sm mb-2 flex items-center"><i data-lucide="users" class="w-4 h-4 mr-1"></i>貴社へのお願い（参加必須）</h4>
-                                <p class="text-gray-600 text-sm">対象業務の<strong class="text-orange-600">現場担当者様のアサイン（各1時間程度）</strong>と、現在使用しているExcelや帳票サンプルのご提供をお願いします。</p>
+                                <p class="text-gray-600 text-sm">対象業務の<strong class="text-orange-600">現場担当者様のアサイン（各1時間程度）</strong>と、現在使用しているExcelサンプルのご提供をお願いします。</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Step 2 -->
-                <div class="step-item relative flex items-start step-line">
-                    <div class="flex-shrink-0 relative z-10 flex items-center justify-center w-12 h-12 bg-blue-600 text-white font-black text-xl rounded-full shadow-lg border-4 border-white -ml-6 md:ml-0">2</div>
-                    <div class="ml-6 bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-8 w-full shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex flex-wrap items-center justify-between mb-4 gap-2 border-b border-gray-200 pb-4">
+                <div class="relative flex flex-col md:flex-row items-start">
+                    <div class="hidden md:flex flex-shrink-0 relative z-10 items-center justify-center w-12 h-12 bg-blue-600 text-white font-black text-xl rounded-full shadow-lg border-4 border-white">2</div>
+                    <div class="md:ml-8 bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-8 w-full shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2 border-b border-gray-200 pb-4">
                             <h3 class="text-xl font-bold text-gray-900 flex items-center">
-                                <i data-lucide="bot" class="w-5 h-5 mr-2 text-blue-600"></i>
-                                AIを活用した「To-Be（理想の姿）」の設計
+                                <span class="md:hidden flex items-center justify-center w-8 h-8 bg-blue-600 text-white font-black text-sm rounded-full mr-3">2</span>
+                                <i data-lucide="bot" class="hidden md:block w-5 h-5 mr-2 text-blue-600"></i>
+                                治療方針の策定（AI適合設計・推奨ツール選定）
                             </h3>
-                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Week 2</span>
+                            <span class="self-start md:self-auto bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Week 2</span>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-6 mt-4">
+                        <div class="grid md:grid-cols-2 gap-4 md:gap-6 mt-4">
                             <div class="bg-white p-5 rounded-xl border-l-4 border-blue-500 shadow-sm">
-                                <h4 class="font-bold text-blue-800 text-sm mb-2 flex items-center"><i data-lucide="user-check" class="w-4 h-4 mr-1"></i>弊社の作業</h4>
-                                <p class="text-gray-600 text-sm">最新のAIやSaaSツールを組み合わせた「無駄のない理想のフロー（To-Be）」を設計し、推奨ツールリストと共にドラフト（原案）を提示します。</p>
+                                <h4 class="font-bold text-blue-800 text-sm mb-2 flex items-center"><i data-lucide="user-check" class="w-4 h-4 mr-1"></i>専門チームの作業</h4>
+                                <p class="text-gray-600 text-sm">貴社の現場にバシッと「適合」するAIツールを組み合わせ、無駄のない理想のフロー（AI処方箋）を設計します。</p>
                             </div>
                             <div class="bg-white p-5 rounded-xl border-l-4 border-orange-400 shadow-sm">
                                 <h4 class="font-bold text-orange-700 text-sm mb-2 flex items-center"><i data-lucide="users" class="w-4 h-4 mr-1"></i>貴社へのお願い（参加必須）</h4>
@@ -394,48 +426,55 @@
                 </div>
 
                 <!-- Step 3 -->
-                <div class="step-item relative flex items-start step-line">
-                    <div class="flex-shrink-0 relative z-10 flex items-center justify-center w-12 h-12 bg-blue-600 text-white font-black text-xl rounded-full shadow-lg border-4 border-white -ml-6 md:ml-0">3</div>
-                    <div class="ml-6 bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-8 w-full shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex flex-wrap items-center justify-between mb-4 gap-2 border-b border-gray-200 pb-4">
+                <div class="relative flex flex-col md:flex-row items-start">
+                    <div class="hidden md:flex flex-shrink-0 relative z-10 items-center justify-center w-12 h-12 bg-blue-600 text-white font-black text-xl rounded-full shadow-lg border-4 border-white">3</div>
+                    <div class="md:ml-8 bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-8 w-full shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2 border-b border-gray-200 pb-4">
                             <h3 class="text-xl font-bold text-gray-900 flex items-center">
-                                <i data-lucide="trending-up" class="w-5 h-5 mr-2 text-blue-600"></i>
-                                期待効果（ROI）の算出とシミュレーション
+                                <span class="md:hidden flex items-center justify-center w-8 h-8 bg-blue-600 text-white font-black text-sm rounded-full mr-3">3</span>
+                                <i data-lucide="trending-up" class="hidden md:block w-5 h-5 mr-2 text-blue-600"></i>
+                                回復効果（ROI）のシミュレーション
                             </h3>
-                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Week 3</span>
+                            <span class="self-start md:self-auto bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Week 3</span>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-6 mt-4">
+                        <div class="grid md:grid-cols-2 gap-4 md:gap-6 mt-4">
                             <div class="bg-white p-5 rounded-xl border-l-4 border-blue-500 shadow-sm">
-                                <h4 class="font-bold text-blue-800 text-sm mb-2 flex items-center"><i data-lucide="user-check" class="w-4 h-4 mr-1"></i>弊社の作業</h4>
-                                <p class="text-gray-600 text-sm">To-Beフロー導入による「年間削減時間」や「コスト削減額（ROI）」を論理的に算出し、稟議や補助金申請に使えるレポートを作成します。</p>
+                                <h4 class="font-bold text-blue-800 text-sm mb-2 flex items-center"><i data-lucide="user-check" class="w-4 h-4 mr-1"></i>専門チームの作業</h4>
+                                <p class="text-gray-600 text-sm">AI導入による「年間削減時間」や「コスト削減額（ROI）」を論理的に算出し、稟議や補助金申請に使えるレポートを作成します。</p>
                             </div>
                             <div class="bg-white p-5 rounded-xl border-l-4 border-orange-400 shadow-sm">
                                 <h4 class="font-bold text-orange-700 text-sm mb-2 flex items-center"><i data-lucide="users" class="w-4 h-4 mr-1"></i>貴社へのお願い（参加必須）</h4>
-                                <p class="text-gray-600 text-sm">算出の根拠となる<strong class="text-orange-600">「月間の処理件数」「担当者の概算人件費（時給換算）」など、実データの提供</strong>をお願いします（NDA締結済）。</p>
+                                <p class="text-gray-600 text-sm">算出の根拠となる<strong class="text-orange-600">実データの提供</strong>をお願いします。</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Step 4 -->
-                <div class="step-item relative flex items-start step-line">
-                    <div class="flex-shrink-0 relative z-10 flex items-center justify-center w-12 h-12 bg-blue-600 text-white font-black text-xl rounded-full shadow-lg border-4 border-white -ml-6 md:ml-0">4</div>
-                    <div class="ml-6 bg-blue-50 border border-blue-200 rounded-2xl p-6 md:p-8 w-full shadow-md">
-                        <div class="flex flex-wrap items-center justify-between mb-4 gap-2 border-b border-blue-200 pb-4">
+                <div class="relative flex flex-col md:flex-row items-start">
+                    <div class="hidden md:flex flex-shrink-0 relative z-10 items-center justify-center w-12 h-12 bg-blue-600 text-white font-black text-xl rounded-full shadow-lg border-4 border-white">4</div>
+                    <div class="md:ml-8 bg-blue-50 border border-blue-200 rounded-2xl p-6 md:p-8 w-full shadow-md">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2 border-b border-blue-200 pb-4">
                             <h3 class="text-xl font-bold text-blue-900 flex items-center">
-                                <i data-lucide="file-check" class="w-5 h-5 mr-2 text-blue-600"></i>
-                                計画書の納品・報告会の実施
+                                <span class="md:hidden flex items-center justify-center w-8 h-8 bg-blue-600 text-white font-black text-sm rounded-full mr-3">4</span>
+                                <!-- ここもスタイリッシュなオリジナルアイコンを活用 -->
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="hidden md:block w-5 h-5 mr-2 text-blue-600">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M14 2v6h6" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M10 13l2-3 2 3 3 2-3 2-2 3-2-3-3-2 3-2z" stroke="#06b6d4" stroke-width="1.5" fill="none" stroke-linejoin="round"></path>
+                                </svg>
+                                診断報告と『現場カルテ ＆ AI処方箋』の納品
                             </h3>
-                            <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">納品</span>
+                            <span class="self-start md:self-auto bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">納品</span>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-6 mt-4">
+                        <div class="grid md:grid-cols-2 gap-4 md:gap-6 mt-4">
                             <div class="bg-white p-5 rounded-xl border-l-4 border-blue-500 shadow-sm">
-                                <h4 class="font-bold text-blue-800 text-sm mb-2 flex items-center"><i data-lucide="user-check" class="w-4 h-4 mr-1"></i>弊社の作業</h4>
-                                <p class="text-gray-600 text-sm">すべての分析結果を「DX推進計画書」としてまとめ、報告会を実施します。<br><span class="text-xs text-blue-700 mt-2 inline-block font-bold">※プレミアムプランの場合、この内容を「IT導入補助金」等の事業計画ベース資料として整理し納品します。</span></p>
+                                <h4 class="font-bold text-blue-800 text-sm mb-2 flex items-center"><i data-lucide="user-check" class="w-4 h-4 mr-1"></i>専門チームの作業</h4>
+                                <p class="text-gray-600 text-sm">すべての分析結果を『現場AIカルテ』としてまとめ、報告会を実施します。<br><span class="text-xs text-blue-700 mt-2 inline-block font-bold">※プレミアムプランの場合、IT導入補助金の事業計画ベース資料として整理します。</span></p>
                             </div>
                             <div class="bg-white p-5 rounded-xl border-l-4 border-orange-400 shadow-sm">
                                 <h4 class="font-bold text-orange-700 text-sm mb-2 flex items-center"><i data-lucide="users" class="w-4 h-4 mr-1"></i>貴社へのお願い（参加必須）</h4>
-                                <p class="text-gray-600 text-sm">報告会には、<strong class="text-orange-600">今後のIT投資をジャッジする決裁者（経営陣）の同席</strong>を強く推奨します。その後、社内稟議や補助金申請を進めてください。</p>
+                                <p class="text-gray-600 text-sm">報告会には、<strong class="text-orange-600">今後のIT投資をジャッジする決裁者（経営陣）の同席</strong>を強く推奨します。その後、社内稟議を進めてください。</p>
                             </div>
                         </div>
                     </div>
@@ -444,71 +483,71 @@
         </div>
     </section>
 
-    <!-- 料金プラン (Pricing - 3パターン展開) -->
-    <section class="py-24 bg-gray-100 border-t border-gray-200 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
+    <!-- 料金プラン (Pricing) -->
+    <section class="py-24 bg-gray-100 border-t border-gray-200 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-16">
                 <span class="text-blue-600 font-bold tracking-wider text-sm mb-2 block">PRICING PLANS</span>
-                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">プロジェクト規模に合わせた3つのプラン</h2>
+                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">プロジェクト規模に合わせた3つの診断プラン</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">
-                    簡易な分析から、ツール選定や補助金申請を見据えた伴走支援まで。<br>貴社のフェーズに合わせてお選びいただけます。
+                    簡易な診断から、ツール選定や補助金申請を見据えた伴走プランまで。<br>貴社のフェーズに合わせてお選びいただけます。
                 </p>
             </div>
             
             <div class="grid lg:grid-cols-3 gap-8 items-start max-w-6xl mx-auto">
                 
-                <!-- プラン：ライト -->
+                <!-- プラン：ライト（お試し診断） -->
                 <div class="bg-white rounded-3xl shadow-sm border border-gray-200 overflow-hidden transform transition-all hover:-translate-y-1">
                     <div class="p-8">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">ライトプラン</h3>
-                        <p class="text-sm text-gray-500 mb-6 h-10">業務の簡易分析と可視化に特化したお試しプラン。</p>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 hover:gradient-text transition-colors">お試し問診プラン</h3>
+                        <p class="text-sm text-gray-500 mb-6 h-10">業務の簡易分析と可視化に特化した、まずはの健康診断プラン。</p>
                         <div class="flex items-baseline mb-6">
-                            <span class="text-4xl font-black text-gray-900">¥100,000</span><span class="text-gray-500 ml-1 text-sm">〜(税別)</span>
+                            <span class="text-4xl font-black text-gray-900 hover:gradient-text transition-colors">¥100,000</span><span class="text-gray-500 ml-1 text-sm">〜(税別)</span>
                         </div>
                         <ul class="space-y-4 mb-8 text-sm">
-                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i><span class="text-gray-700">簡易ヒアリング（1回）</span></li>
-                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i><span class="text-gray-700">簡易As-Is/To-Be図の作成</span></li>
+                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0"></i><span class="text-gray-700">簡易問診（1回）</span></li>
+                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0"></i><span class="text-gray-700">簡易な現場カルテ ＆ AI処方箋</span></li>
                             <li class="flex items-start text-gray-400"><i data-lucide="minus" class="w-5 h-5 mr-2 flex-shrink-0"></i><span>詳細ROIシミュレーション</span></li>
                             <li class="flex items-start text-gray-400"><i data-lucide="minus" class="w-5 h-5 mr-2 flex-shrink-0"></i><span>補助金申請向け資料整理</span></li>
                         </ul>
-                        <button class="w-full bg-white border-2 border-blue-600 text-blue-600 font-bold py-3 rounded-xl hover:bg-blue-50 transition-colors">相談する</button>
+                        <button class="w-full bg-white border-2 border-blue-600 text-blue-600 font-bold py-3 rounded-xl hover:bg-blue-50 transition-colors">無料の問診を予約する</button>
                     </div>
                 </div>
 
-                <!-- プラン：スタンダード（強調を緩和） -->
+                <!-- プラン：スタンダード（現場カルテ作成） -->
                 <div class="bg-white rounded-3xl shadow-md border-2 border-blue-400 overflow-hidden transform transition-all hover:-translate-y-1 relative">
                     <div class="bg-blue-500 text-white text-center py-1.5 text-xs font-bold tracking-wider">
                         おすすめ
                     </div>
                     <div class="p-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">スタンダードプラン</h3>
-                        <p class="text-sm text-gray-600 mb-6 h-10">複雑な業務を分析し、ROI算出まで行う基本パッケージ。</p>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2 hover:gradient-text transition-colors">現場カルテ作成プラン</h3>
+                        <p class="text-sm text-gray-600 mb-6 h-10">複雑な業務を分析し、ROI算出とAI適合設計まで行う基本パッケージ。</p>
                         <div class="flex items-baseline mb-6">
-                            <span class="text-4xl font-black text-blue-600">¥200,000</span><span class="text-gray-500 ml-1 text-sm">〜(税別)</span>
+                            <span class="text-4xl font-black text-blue-600 hover:gradient-text transition-colors">¥200,000</span><span class="text-gray-500 ml-1 text-sm">〜(税別)</span>
                         </div>
                         <ul class="space-y-4 mb-8 text-sm font-medium">
-                            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 mr-2 flex-shrink-0"></i><span class="text-gray-800">徹底ヒアリング</span></li>
-                            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 mr-2 flex-shrink-0"></i><span class="text-gray-800">AI活用 As-Is/To-Be設計図作成</span></li>
-                            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 mr-2 flex-shrink-0"></i><span class="text-gray-800">具体的なROI（費用対効果）算出</span></li>
+                            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 mr-2 flex-shrink-0"></i><span class="text-gray-800">徹底した精密問診</span></li>
+                            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 mr-2 flex-shrink-0"></i><span class="text-gray-800 font-bold">AI処方箋（現場×AI適合設計図）の作成</span></li>
+                            <li class="flex items-start"><i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 mr-2 flex-shrink-0"></i><span class="text-gray-800 font-bold">具体的なROI（回復効果）算出</span></li>
                             <li class="flex items-start text-gray-400"><i data-lucide="minus" class="w-5 h-5 mr-2 flex-shrink-0"></i><span>補助金申請向け資料整理</span></li>
                         </ul>
-                        <button class="w-full bg-blue-600 text-white font-bold py-3.5 rounded-xl hover:bg-blue-700 transition-colors shadow-sm text-base">このプランで無料相談へ</button>
+                        <button class="w-full bg-blue-600 text-white font-bold py-3.5 rounded-xl hover:bg-blue-700 transition-colors shadow-sm text-base">このプランで無料問診へ</button>
                     </div>
                 </div>
 
-                <!-- プラン：プレミアム -->
+                <!-- プラン：プレミアム（完全処方） -->
                 <div class="bg-white rounded-3xl shadow-sm border border-gray-200 overflow-hidden transform transition-all hover:-translate-y-1">
                     <div class="p-8">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">プレミアムプラン</h3>
-                        <p class="text-sm text-gray-500 mb-6 h-10">補助金申請の資料整理や、ツール選定まで伴走支援。</p>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 hover:gradient-text transition-colors">完全処方＆伴走プラン</h3>
+                        <p class="text-sm text-gray-500 mb-6 h-10">補助金申請の資料整理や、ベンダー選定まで完全伴走サポート。</p>
                         <div class="flex items-baseline mb-6">
-                            <span class="text-4xl font-black text-gray-900">¥500,000</span><span class="text-gray-500 ml-1 text-sm">〜(税別)</span>
+                            <span class="text-4xl font-black text-gray-900 hover:gradient-text transition-colors">¥500,000</span><span class="text-gray-500 ml-1 text-sm">〜(税別)</span>
                         </div>
                         <ul class="space-y-4 mb-8 text-sm">
-                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i><span class="text-gray-700">スタンダードの全内容</span></li>
-                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i><span class="text-gray-700 font-bold border-b border-green-200 pb-0.5">補助金申請の事業計画ベース資料</span></li>
-                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i><span class="text-gray-700">複数ツールの比較検討表作成</span></li>
-                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i><span class="text-gray-700">ベンダー面談への同席</span></li>
+                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0"></i><span class="text-gray-700 font-bold">現場カルテ作成プランの全内容</span></li>
+                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0"></i><span class="text-gray-700 font-bold border-b border-blue-200 pb-0.5">補助金申請の事業計画ベース資料</span></li>
+                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0"></i><span class="text-gray-700">複数ツールの比較検討表作成</span></li>
+                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0"></i><span class="text-gray-700 font-bold">ベンダー面談への同席（治療伴走）</span></li>
                         </ul>
                         <button class="w-full bg-white border-2 border-gray-300 text-gray-700 font-bold py-3 rounded-xl hover:bg-gray-50 transition-colors">相談する</button>
                     </div>
@@ -518,16 +557,23 @@
         </div>
     </section>
 
-    <!-- CTA (Call To Action) -->
+    <!-- 積極的なメッセージのCTA -->
     <section id="cta" class="py-20 bg-gray-900 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#3B82F6 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <div class="absolute inset-0 opacity-20 bg-gradient-to-r from-blue-900/40 via-transparent to-cyan-900/40"></div>
+        
         <div class="max-w-3xl mx-auto relative z-10">
-            <h2 class="text-3xl md:text-5xl font-black text-white mb-6">
-                まずは無料で、貴社の「現在地」を<br class="hidden sm:block"/>お聞かせください。
+            <span class="text-cyan-400 font-bold tracking-wider text-sm mb-4 block">AI投資を成功させる第一歩</span>
+            <h2 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
+                まずは無料相談で、貴社の現場の<br class="hidden sm:block"/>「痛む場所（ムダと課題）」をプロにぶつけてください。
             </h2>
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10">
-                <button class="w-full sm:w-auto bg-blue-600 text-white px-10 py-5 rounded-full font-black text-xl hover:bg-blue-500 transition-colors shadow-xl shadow-blue-900/50">
-                    無料オンライン相談を予約する
+            <p class="text-gray-300 text-lg mb-10 leading-relaxed">
+                自社に最適なAIは何か？どう進めるべきか？<br>
+                「何から始めるべきか」を明確にする、有意義な30分（問診）をご提供します。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <button class="w-full sm:w-auto bg-blue-600 text-white px-10 py-5 rounded-full font-black text-xl hover:bg-blue-500 transition-colors shadow-xl shadow-blue-900/50 flex items-center justify-center transform transition-transform hover:scale-105 hover:-translate-y-1">
+                    無料オンライン問診を予約する
+                    <i data-lucide="chevron-right" class="w-5 h-5 ml-1"></i>
                 </button>
             </div>
             <p class="mt-6 text-sm text-gray-400">
@@ -539,16 +585,22 @@
     <!-- フッター -->
     <footer class="bg-black text-gray-500 py-12 text-center">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-center items-center mb-6">
-                <i data-lucide="cpu" class="w-5 h-5 mr-2"></i>
-                <span class="font-bold text-xl text-gray-300">AI-Flow Design</span>
+            <div class="flex justify-center items-end mb-6">
+                <!-- フッターもオリジナルアイコンを使用 -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7 mr-1.5 text-gray-400 pb-1">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M14 2v6h6" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M10 13l2-3 2 3 3 2-3 2-2 3-2-3-3-2 3-2z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"></path>
+                </svg>
+                <span class="text-xl tracking-widest text-gray-300 leading-none pt-1">
+                    <span class="font-light">現場</span><span class="font-black px-0.5 tracking-normal">AI</span><span class="font-light">カルテ</span>
+                </span>
             </div>
-            <p class="text-sm">© 2026 AI-Flow Design Consulting. All rights reserved.</p>
+            <p class="text-sm">© 2026 AICHI CONSULTING. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Lucideアイコンの初期化
         lucide.createIcons();
     </script>
 </body>

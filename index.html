@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>東海・愛知のAI導入コンサルティング | AICHI CONSULTING</title>
-    <meta name="description" content="愛知県名古屋市を中心に東海地方（愛知・岐阜・三重・静岡）の製造業・中小企業向けAI導入・DX支援を行うコンサルティングファーム。生成AIから画像認識まで、現場に定着するシステム開発と伴走サポートを提供します。">
-    <meta name="keywords" content="東海, 愛知, 名古屋, AI導入, AIコンサルティング, 製造業, DX, 中小企業">
+    <meta name="description" content="愛知県名古屋市を中心に東海地方（愛知・岐阜・三重・静岡）の中小企業向けAI導入・DX支援を行うコンサルティングファーム。生成AIから画像認識まで、現場に定着するシステム開発と伴走サポートを提供します。">
+    <meta name="keywords" content="東海, 愛知, 名古屋, AI導入, AIコンサルティング, DX, 中小企業">
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -65,11 +65,8 @@
             -webkit-font-smoothing: antialiased;
         }
         
-        /* --------------------------------------
-           オープニングアニメーション (完全CSS制御)
-        --------------------------------------- */
+        /* オープニングアニメーション */
         .opening-screen-container {
-            /* Tailwindの読み込みを待たずに確実に前面を覆う */
             position: fixed;
             top: 0;
             left: 0;
@@ -81,7 +78,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            /* 2.5秒後に上にスライドして消える */
             animation: hide-screen 1.2s cubic-bezier(0.85, 0, 0.15, 1) 2.5s forwards;
         }
 
@@ -101,7 +97,6 @@
 
         .opening-logo-accent {
             opacity: 0;
-            /* 少し遅れて青く光る */
             animation: fade-in 0.5s ease 0.8s forwards;
             filter: drop-shadow(0 0 10px rgba(14, 165, 233, 0.8));
         }
@@ -136,21 +131,15 @@
             100% { width: 100%; }
         }
 
-        /* ヒーローセクション表示アニメーション（オープニング後） */
         .hero-reveal {
             opacity: 0;
             transform: translateY(40px);
-            /* オープニングが終わるタイミング(約3秒後)でフワッと出る */
             animation: hero-fade-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 3s forwards;
         }
         @keyframes hero-fade-in {
             to { opacity: 1; transform: translateY(0); }
         }
 
-
-        /* --------------------------------------
-           通常のスタイル設定
-        --------------------------------------- */
         .nav-scrolled {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
@@ -208,27 +197,29 @@
             box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
             border-color: #cbd5e1;
         }
+
+        /* フローの矢印デザイン用 */
+        .step-arrow::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #0EA5E9;
+            opacity: 0.3;
+            z-index: 0;
+        }
     </style>
 </head>
 <body class="bg-brand-light font-sans overflow-x-hidden relative">
 
-    <!-- 
-      オープニングスクリーン
-      インラインスタイルで確実に色と位置を指定し、CSSアニメーションで制御
-    -->
+    <!-- オープニングスクリーン -->
     <div id="opening-screen" class="opening-screen-container">
         <div class="flex flex-col items-center">
-            
-            <!-- ロゴアイコン -->
             <div class="mb-8 overflow-hidden py-2">
                 <svg width="80" height="80" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="opening-logo">
                     <path d="M20 4L4 36H11L20 18L29 36H36L20 4Z" fill="#ffffff" />
-                    <!-- アクセントカラー（AIの起動をイメージして遅れて光る） -->
                     <path d="M13 26H27V30H13V26Z" fill="#0EA5E9" class="opening-logo-accent" />
                 </svg>
             </div>
-            
-            <!-- メインテキスト -->
             <div class="overflow-hidden">
                 <div class="opening-text-wrapper text-center">
                     <span class="font-black text-3xl md:text-5xl leading-none tracking-widest text-white uppercase inline-block">
@@ -236,21 +227,18 @@
                     </span>
                 </div>
             </div>
-            
-            <!-- サブテキスト -->
             <div class="overflow-hidden mt-4">
                  <span class="opening-subtext font-bold tracking-[0.4em] text-white/50 uppercase text-xs md:text-sm inline-block">
                     Innovating Industry
                 </span>
             </div>
         </div>
-        
-        <!-- プログレスバー -->
         <div class="absolute bottom-1/4 w-48 md:w-64 h-0.5 bg-white/10 rounded-full overflow-hidden">
             <div class="opening-progress h-full bg-brand-cyan rounded-full" style="background-color: #0EA5E9;"></div>
         </div>
     </div>
 
+    <!-- ナビゲーション -->
     <nav class="fixed w-full z-40 transition-all duration-500 py-4" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -260,7 +248,6 @@
                         <path d="M20 4L4 36H11L20 18L29 36H36L20 4Z" fill="currentColor" class="text-white transition-colors duration-300" id="logo-path-1" />
                         <path d="M13 26H27V30H13V26Z" fill="#0EA5E9" />
                     </svg>
-                    
                     <div class="flex flex-col justify-center text-left">
                         <span class="font-black text-xl leading-none tracking-wider text-white transition-colors duration-300 uppercase" id="logo-text">
                             <span class="text-brand-cyan">AI</span>CHI CONSULTING
@@ -309,20 +296,20 @@
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <!-- オープニング後にフワッと表示されるクラス (hero-reveal) -->
             <div class="max-w-4xl hero-reveal">
-                <div class="inline-flex items-center px-3 py-1.5 rounded-lg bg-brand-cyan/20 backdrop-blur-md border border-brand-cyan/30 text-xs md:text-sm font-black text-brand-cyan tracking-[0.1em] ">
-                    <i data-lucide="sparkles" class="w-4 h-4 mr-2"></i>
-                    愛知・東海のAI導入コンサルティング
+                <div class="inline-flex items-center px-4 py-2 rounded-full bg-brand-navy/40 backdrop-blur-md border border-brand-cyan/30 text-xs md:text-sm font-black text-white tracking-[0.1em] mb-6">
+                    <i data-lucide="sparkles" class="w-4 h-4 mr-2 text-brand-cyan"></i>
+                    <span class="text-brand-cyan text-base mr-0.5">AI</span>CHI × <span class="text-brand-cyan text-base ml-1 mr-0.5">AI</span> で、東海の現場を変える
                 </div>
                 
-                <h1 class="text-4xl sm:text-6xl lg:text-6xl font-black leading-[1.15] mb-8 text-white tracking-tighter text-shadow-strong mt-6">
-                    <span class="highlight-text">AI</span>CHIから革新を、<br>
-                    <span class="highlight-text">AI</span>で<span class="highlight-text">新しい価値</span>を。
+                <!-- 改善①②：メッセージをシンプルに、AICHIの意味を明確化 -->
+                <h1 class="text-4xl sm:text-6xl lg:text-6xl font-black leading-[1.15] mb-8 text-white tracking-tighter text-shadow-strong mt-2 break-keep">
+                    <span class="highlight-text">愛知</span>から革新を、<br>
+                    <span class="highlight-text">AI</span>で<span class="highlight-text inline-block">新しい価値</span>を。
                 </h1>
                 
-                <p class="text-base sm:text-lg lg:text-xl text-slate-100 leading-relaxed mb-10 max-w-2xl font-medium text-shadow-strong opacity-95">
-                    「もっとこうしたい」という現場の想いを、世界基準のAI技術で形にします。愛知から、ものづくりの未来を塗り替える。
+                <p class="text-base sm:text-lg lg:text-xl text-slate-100 leading-relaxed mb-10 max-w-2xl font-medium text-shadow-strong opacity-95 break-keep">
+                    「もっとこうしたい」という現場の想いを、世界基準のAI技術で形にします。<br class="hidden md:block">愛知から、貴社のビジネスに<strong class="text-brand-cyan font-black text-xl lg:text-2xl ml-1 inline-block">圧倒的な生産性とゆとり</strong>を生み出す。
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4">
@@ -344,28 +331,30 @@
     </header>
 
     <main>
+        <!-- 改善③④⑤：VISIONと課題の強調 -->
         <section id="problems" class="py-20 md:py-24 bg-brand-light relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="text-center max-w-4xl mx-auto mb-16 md:mb-20 reveal">
                     <span class="text-brand-cyan font-black tracking-[0.3em] text-xs uppercase mb-4 block">Our Vision</span>
-                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy mb-6 leading-tight">
-                        AIは目的ではない。<br>
-                        会社を<span class="text-brand-cyan border-b-4 border-brand-cyan">飛躍させる道具</span>です。
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy mb-6 leading-tight break-keep">
+                        働く人が輝き<br>
+                        企業が<span class="text-brand-cyan border-b-4 border-brand-cyan inline-block">持続的に成長する未来</span>を創る。
                     </h2>
-                    <p class="text-lg text-slate-600 font-bold leading-relaxed max-w-3xl mx-auto">
-                        現場の「苦労」を取り除き、社員がいきいきと働き、貴社のビジネスが次のステージへと進化する。AIを通じて、そんな「もっと良い会社」になるための未来を創ります。
+                    <p class="text-lg text-slate-600 font-bold leading-relaxed max-w-3xl mx-auto break-keep">
+                        AIは目的ではなく、会社を飛躍させるための道具です。<br class="hidden md:block">現場の「苦労」を取り除き、人が人らしい創造的な仕事に夢中になれる。<br class="hidden md:block">AIを通じて、そんな豊かで強い企業づくりをご支援します。
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div class="clean-card p-6 md:p-8 reveal flex flex-col">
+                    
+                    <!-- 課題1 -->
+                    <div class="clean-card p-6 md:p-8 reveal flex flex-col border-t-4 border-t-brand-navy">
                         <div class="mb-6 pb-6 border-b-2 border-slate-100 border-dashed relative">
-                            <span class="inline-block bg-slate-200 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3">Before (現状の課題)</span>
-                            <h4 class="font-black text-base text-slate-600 mb-2 flex items-center gap-2">
-                                <i data-lucide="user-minus" class="w-4 h-4 text-slate-400"></i>
-                                「あの人しか分からない」
-                            </h4>
-                            <p class="text-xs text-slate-500 font-medium leading-relaxed">暗黙知が多く技術伝承が進まない。一部のベテランに業務が集中し、現場が疲弊している。</p>
+                            <span class="inline-block bg-slate-200 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3">Before (現場の課題)</span>
+                            <!-- 課題を目立たせる -->
+                            <h4 class="font-black text-2xl text-red-600 mb-2">技術伝承が進まない</h4>
+                            <p class="text-sm font-bold text-slate-700 mb-2">「あの人しか分からない」暗黙知の壁</p>
+                            <p class="text-xs text-slate-500 font-medium leading-relaxed">一部のベテランに業務が集中し、現場が疲弊。若手への教育にも膨大な時間がかかっている。</p>
                         </div>
                         
                         <div class="relative flex-1 flex flex-col">
@@ -378,19 +367,19 @@
                                 誰もがすぐ活躍できる<br>強い組織へ
                             </h3>
                             <p class="text-slate-600 leading-relaxed font-bold text-sm mt-auto">
-                                属人化していたノウハウをAIでデータ資産化。新人でも一定の成果を出せる仕組みができ、組織全体の生産性が底上げされ、<span class="text-brand-cyan font-black bg-brand-cyan/10 px-1 py-0.5 rounded">教育時間を約40%削減(例)</span>。
+                                属人化していたノウハウをAIでデータ資産化。新人でも一定の成果を出せる仕組みができ、<span class="text-brand-cyan font-black bg-brand-cyan/10 px-1 py-0.5 rounded">教育時間を約40%削減(例)</span>。
                             </p>
                         </div>
                     </div>
 
-                    <div class="clean-card p-6 md:p-8 reveal delay-100 flex flex-col">
+                    <!-- 課題2 -->
+                    <div class="clean-card p-6 md:p-8 reveal delay-100 flex flex-col border-t-4 border-t-brand-navy">
                         <div class="mb-6 pb-6 border-b-2 border-slate-100 border-dashed relative">
-                            <span class="inline-block bg-slate-200 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3">Before (現状の課題)</span>
-                            <h4 class="font-black text-base text-slate-600 mb-2 flex items-center gap-2">
-                                <i data-lucide="clock" class="w-4 h-4 text-slate-400"></i>
-                                「毎日、確認作業ばかり」
-                            </h4>
-                            <p class="text-xs text-slate-500 font-medium leading-relaxed">過去の図面探し、目視検査、見積り作成。ルーチンワークに追われ、新しいことを考える時間がない。</p>
+                            <span class="inline-block bg-slate-200 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3">Before (現場の課題)</span>
+                            <!-- 課題を目立たせる -->
+                            <h4 class="font-black text-2xl text-red-600 mb-2">考える時間がない</h4>
+                            <p class="text-sm font-bold text-slate-700 mb-2">「毎日、確認作業ばかり」のジレンマ</p>
+                            <p class="text-xs text-slate-500 font-medium leading-relaxed">過去の図面探し、目視検査、見積り作成など、ルーチンワークに追われ新しい施策に手が回らない。</p>
                         </div>
                         
                         <div class="relative flex-1 flex flex-col">
@@ -403,19 +392,19 @@
                                 人は「創造的な仕事」<br>に集中する
                             </h3>
                             <p class="text-slate-600 leading-relaxed font-bold text-sm mt-auto">
-                                単純な確認・検索作業はAIが瞬時に代替。<span class="text-brand-cyan font-black bg-brand-cyan/10 px-1 py-0.5 rounded">月間約80時間(例)</span>のルーチン作業を削減し、人間ならではの付加価値の高い仕事に注力できます。
+                                単純な確認・検索作業はAIが瞬時に代替。<span class="text-brand-cyan font-black bg-brand-cyan/10 px-1 py-0.5 rounded">月間約80時間(例)</span>のルーチン作業を削減し、高付加価値な仕事に注力。
                             </p>
                         </div>
                     </div>
 
-                    <div class="clean-card p-6 md:p-8 reveal delay-200 flex flex-col">
+                    <!-- 課題3 -->
+                    <div class="clean-card p-6 md:p-8 reveal delay-200 flex flex-col border-t-4 border-t-brand-navy">
                         <div class="mb-6 pb-6 border-b-2 border-slate-100 border-dashed relative">
-                            <span class="inline-block bg-slate-200 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3">Before (現状の課題)</span>
-                            <h4 class="font-black text-base text-slate-600 mb-2 flex items-center gap-2">
-                                <i data-lucide="help-circle" class="w-4 h-4 text-slate-400"></i>
-                                「カンと度胸のどんぶり勘定」
-                            </h4>
-                            <p class="text-xs text-slate-500 font-medium leading-relaxed">現場の勘や過去の経験則だけで計画を立てており、突発的なトラブル時のリカバリーが遅れがち。</p>
+                            <span class="inline-block bg-slate-200 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3">Before (現場の課題)</span>
+                            <!-- 課題を目立たせる -->
+                            <h4 class="font-black text-2xl text-red-600 mb-2">突発的な対応で疲弊</h4>
+                            <p class="text-sm font-bold text-slate-700 mb-2">「カンと度胸」に依存した運営</p>
+                            <p class="text-xs text-slate-500 font-medium leading-relaxed">突然の欠品や機械トラブルなど、問題が起きてからの事後対応が多く、現場のスケジュールが狂いがち。</p>
                         </div>
                         
                         <div class="relative flex-1 flex flex-col">
@@ -425,10 +414,10 @@
                             <span class="inline-block bg-brand-cyan/10 text-brand-cyan text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3 self-start mt-2">After (AIで叶える未来)</span>
                             <h3 class="text-xl font-black mb-3 text-brand-navy flex items-start gap-2">
                                 <i data-lucide="trending-up" class="w-6 h-6 text-brand-cyan shrink-0"></i>
-                                データに基づく<br>強い企業体質へ
+                                足元のリスクを予測し<br>安定した現場へ
                             </h3>
                             <p class="text-slate-600 leading-relaxed font-bold text-sm mt-auto">
-                                現場のデータをAIが分析し、需要予測や最適な生産計画を提示。<span class="text-brand-cyan font-black bg-brand-cyan/10 px-1 py-0.5 rounded">欠品率を半減(例)</span>させ、変化に素早く対応できる無駄のない経営を実現します。
+                                過去のパターンからAIがリスクを予測。<span class="text-brand-cyan font-black bg-brand-cyan/10 px-1 py-0.5 rounded">トラブルを未然に防ぎ(例)</span>、余裕を持った安定的な業務運営を実現します。
                             </p>
                         </div>
                     </div>
@@ -436,145 +425,100 @@
             </div>
         </section>
 
+        <!-- 改善⑥⑦⑧：製造業の文字削除、注釈追加、フロー感の演出 -->
         <section id="solutions" class="py-20 md:py-24 bg-white border-y border-brand-border">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
                     <span class="text-brand-cyan font-bold tracking-widest text-xs uppercase mb-3 block">Total Solution</span>
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-black text-brand-navy mb-5">ワクワクする未来へ。<br>製造業に寄り添う4つのAI導入ステップ</h2>
-                    <p class="text-base text-slate-600 font-medium leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-black text-brand-navy mb-5 break-keep">ワクワクする未来へ。<br class="md:hidden">貴社に寄り添う4つのAI導入ステップ</h2>
+                    <p class="text-base text-slate-600 font-medium leading-relaxed break-keep">
                         失敗しないAI導入のためには、順序を踏むことが不可欠です。<br class="hidden md:block">私たちは皆様と一緒に楽しみながら、自走できる組織づくりまでをトータルで支援します。
+                    </p>
+                    <p class="text-sm font-bold text-brand-cyan mt-6 bg-brand-cyan/10 inline-block px-5 py-2.5 rounded-full border border-brand-cyan/20 break-keep">
+                        <i data-lucide="info" class="w-4 h-4 inline-block mr-1 -mt-0.5"></i>
+                        下記は基本フローです。実際は貴社の課題に合わせたフルカスタムのプランをご提案します。
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="group clean-card overflow-hidden reveal flex flex-col">
-                        <div class="h-48 relative overflow-hidden bg-brand-navy">
-                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Assessment" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-brand-navy/60 group-hover:bg-brand-navy/40 transition-colors duration-500"></div>
-                            <div class="absolute top-4 left-5 text-white font-black text-5xl opacity-90 drop-shadow-lg">01</div>
-                            <div class="absolute bottom-4 left-5 text-white font-bold text-[10px] tracking-[0.3em] uppercase opacity-70">Assessment</div>
-                        </div>
-                        <div class="p-6 md:p-8 flex-1 flex flex-col">
-                            <h3 class="text-xl font-black text-brand-navy mb-3">診断・教育（アセスメント）</h3>
-                            <p class="text-sm text-slate-600 mb-5 leading-relaxed font-medium">まずは現場を知ることから。経営層のビジョンと現場の課題をすり合わせ、AIで「何が楽しく、楽になるか」を一緒に発見します。</p>
-                            <div class="mb-6 space-y-2">
-                                <div class="flex items-start gap-2">
-                                    <i data-lucide="check" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5 font-bold"></i>
-                                    <span class="text-xs font-bold text-slate-700">業務の棚卸しとAI活用アイデア出し</span>
-                                </div>
-                                <div class="flex items-start gap-2">
-                                    <i data-lucide="check" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5 font-bold"></i>
-                                    <span class="text-xs font-bold text-slate-700">ワクワクする生成AI体験ワークショップ</span>
+                <!-- ステップ間に矢印を配置してフロー感を演出 -->
+                <div class="relative max-w-5xl mx-auto">
+                    <!-- PC用フローライン（背景） -->
+                    <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-brand-cyan/20 via-brand-cyan to-brand-cyan/20 -translate-y-1/2 z-0"></div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4 relative z-10">
+                        
+                        <!-- Step 1 -->
+                        <div class="group bg-white border-2 border-brand-cyan/20 rounded-2xl reveal hover:border-brand-cyan hover:shadow-hover transition-all flex flex-col h-full relative">
+                            <!-- モバイル用矢印 -->
+                            <div class="md:hidden absolute -bottom-5 left-1/2 -translate-x-1/2 w-8 h-8 bg-white border-2 border-brand-cyan rounded-full flex items-center justify-center text-brand-cyan z-20 shadow-sm">
+                                <i data-lucide="arrow-down" class="w-5 h-5 font-black"></i>
+                            </div>
+                            <!-- PC用矢印 -->
+                            <div class="hidden md:flex absolute top-1/2 -right-5 -translate-y-1/2 w-8 h-8 bg-white border-2 border-brand-cyan rounded-full items-center justify-center text-brand-cyan z-20 shadow-sm group-hover:bg-brand-cyan group-hover:text-white transition-colors">
+                                <i data-lucide="chevron-right" class="w-5 h-5 font-black"></i>
+                            </div>
+
+                            <div class="p-6 flex-1 flex flex-col">
+                                <div class="text-brand-cyan font-black text-3xl opacity-30 mb-2">01</div>
+                                <h3 class="text-lg font-black text-brand-navy mb-3">診断・教育</h3>
+                                <p class="text-xs text-slate-600 mb-4 font-medium flex-1">現場の課題を洗い出し、AIで「何が楽になるか」をワークショップ等で一緒に発見します。</p>
+                                <div class="mt-auto pt-4 border-t border-slate-100">
+                                    <span class="text-[10px] text-brand-cyan font-bold block mb-1">得られる価値</span>
+                                    <p class="text-sm font-black text-brand-navy leading-tight">最適なAI活用<br>ロードマップの獲得</p>
                                 </div>
                             </div>
-                            <div class="mt-auto bg-gradient-to-br from-brand-cyan/10 to-brand-light p-5 rounded-xl border border-brand-cyan/30 relative overflow-hidden group-hover:shadow-glow transition-all duration-300">
-                                <div class="absolute top-0 right-0 w-24 h-24 bg-brand-cyan/20 rounded-full blur-xl -translate-y-1/2 translate-x-1/2"></div>
-                                <span class="flex items-center gap-1.5 text-brand-cyan font-black text-[10px] tracking-widest uppercase mb-2">
-                                    <i data-lucide="target" class="w-3.5 h-3.5"></i>
-                                    導入効果・得られる価値
-                                </span>
-                                <p class="text-brand-navy font-black text-base leading-snug">
-                                    「何から始めればいいか」が明確になり、<br><span class="text-brand-cyan border-b-2 border-brand-cyan/30">自社に最適なAI活用ロードマップ</span>が手に入る。
-                                </p>
+                        </div>
+                        
+                        <!-- Step 2 -->
+                        <div class="group bg-white border-2 border-brand-cyan/20 rounded-2xl reveal delay-100 hover:border-brand-cyan hover:shadow-hover transition-all flex flex-col h-full relative">
+                            <div class="md:hidden absolute -bottom-5 left-1/2 -translate-x-1/2 w-8 h-8 bg-white border-2 border-brand-cyan rounded-full flex items-center justify-center text-brand-cyan z-20 shadow-sm">
+                                <i data-lucide="arrow-down" class="w-5 h-5 font-black"></i>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="group clean-card overflow-hidden reveal delay-100 flex flex-col">
-                        <div class="h-48 relative overflow-hidden bg-brand-navy">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Small Start" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-brand-navy/60 group-hover:bg-brand-navy/40 transition-colors duration-500"></div>
-                            <div class="absolute top-4 left-5 text-white font-black text-5xl opacity-90 drop-shadow-lg">02</div>
-                            <div class="absolute bottom-4 left-5 text-white font-bold text-[10px] tracking-[0.3em] uppercase opacity-70">Small Start</div>
-                        </div>
-                        <div class="p-6 md:p-8 flex-1 flex flex-col">
-                            <h3 class="text-xl font-black text-brand-navy mb-3">お試し導入（スモールスタート）</h3>
-                            <p class="text-sm text-slate-600 mb-5 leading-relaxed font-medium">大きな予算をかける前に、既存の安価なツールを使って「本当に役立つか」を小さく素早く試します。失敗を恐れず挑戦できます。</p>
-                            <div class="mb-6 space-y-2">
-                                <div class="flex items-start gap-2">
-                                    <i data-lucide="check" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5 font-bold"></i>
-                                    <span class="text-xs font-bold text-slate-700">社内規定特化型チャットボットの試作</span>
-                                </div>
-                                <div class="flex items-start gap-2">
-                                    <i data-lucide="check" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5 font-bold"></i>
-                                    <span class="text-xs font-bold text-slate-700">スマホカメラを使った簡易チェックAI</span>
+                            <div class="hidden md:flex absolute top-1/2 -right-5 -translate-y-1/2 w-8 h-8 bg-white border-2 border-brand-cyan rounded-full items-center justify-center text-brand-cyan z-20 shadow-sm group-hover:bg-brand-cyan group-hover:text-white transition-colors">
+                                <i data-lucide="chevron-right" class="w-5 h-5 font-black"></i>
+                            </div>
+
+                            <div class="p-6 flex-1 flex flex-col">
+                                <div class="text-brand-cyan font-black text-3xl opacity-30 mb-2">02</div>
+                                <h3 class="text-lg font-black text-brand-navy mb-3">お試し導入</h3>
+                                <p class="text-xs text-slate-600 mb-4 font-medium flex-1">安価なツールで小さく素早く実装。「本当に現場で使えるか」を低コストで検証します。</p>
+                                <div class="mt-auto pt-4 border-t border-slate-100">
+                                    <span class="text-[10px] text-brand-cyan font-bold block mb-1">得られる価値</span>
+                                    <p class="text-sm font-black text-brand-navy leading-tight">現場の納得感と<br>AI効果の実感</p>
                                 </div>
                             </div>
-                            <div class="mt-auto bg-gradient-to-br from-brand-cyan/10 to-brand-light p-5 rounded-xl border border-brand-cyan/30 relative overflow-hidden group-hover:shadow-glow transition-all duration-300">
-                                <div class="absolute top-0 right-0 w-24 h-24 bg-brand-cyan/20 rounded-full blur-xl -translate-y-1/2 translate-x-1/2"></div>
-                                <span class="flex items-center gap-1.5 text-brand-cyan font-black text-[10px] tracking-widest uppercase mb-2">
-                                    <i data-lucide="zap" class="w-3.5 h-3.5"></i>
-                                    導入効果・得られる価値
-                                </span>
-                                <p class="text-brand-navy font-black text-base leading-snug">
-                                    最小限のコストと期間で、現場が<br>「<span class="text-brand-cyan border-b-2 border-brand-cyan/30">AIって本当に便利だね！</span>」と実感できる。
-                                </p>
+                        </div>
+                        
+                        <!-- Step 3 -->
+                        <div class="group bg-white border-2 border-brand-cyan/20 rounded-2xl reveal delay-200 hover:border-brand-cyan hover:shadow-hover transition-all flex flex-col h-full relative">
+                            <div class="md:hidden absolute -bottom-5 left-1/2 -translate-x-1/2 w-8 h-8 bg-white border-2 border-brand-cyan rounded-full flex items-center justify-center text-brand-cyan z-20 shadow-sm">
+                                <i data-lucide="arrow-down" class="w-5 h-5 font-black"></i>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="group clean-card overflow-hidden reveal flex flex-col">
-                        <div class="h-48 relative overflow-hidden bg-brand-navy">
-                            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80" alt="Development" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-brand-navy/60 group-hover:bg-brand-navy/40 transition-colors duration-500"></div>
-                            <div class="absolute top-4 left-5 text-white font-black text-5xl opacity-90 drop-shadow-lg">03</div>
-                            <div class="absolute bottom-4 left-5 text-white font-bold text-[10px] tracking-[0.3em] uppercase opacity-70">Development</div>
-                        </div>
-                        <div class="p-6 md:p-8 flex-1 flex flex-col">
-                            <h3 class="text-xl font-black text-brand-navy mb-3">現場特化型 AIシステム開発</h3>
-                            <p class="text-sm text-slate-600 mb-5 leading-relaxed font-medium">お試しで効果が出たものを、現場が使いやすい本格的なシステムへと育てます。無駄のない、実用性重視の開発を行います。</p>
-                            <div class="mb-6 space-y-2">
-                                <div class="flex items-start gap-2">
-                                    <i data-lucide="check" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5 font-bold"></i>
-                                    <span class="text-xs font-bold text-slate-700">過去図面からの類似案件検索・見積支援</span>
-                                </div>
-                                <div class="flex items-start gap-2">
-                                    <i data-lucide="check" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5 font-bold"></i>
-                                    <span class="text-xs font-bold text-slate-700">熟練工のノウハウを活かした生産計画支援</span>
+                            <div class="hidden md:flex absolute top-1/2 -right-5 -translate-y-1/2 w-8 h-8 bg-white border-2 border-brand-cyan rounded-full items-center justify-center text-brand-cyan z-20 shadow-sm group-hover:bg-brand-cyan group-hover:text-white transition-colors">
+                                <i data-lucide="chevron-right" class="w-5 h-5 font-black"></i>
+                            </div>
+
+                            <div class="p-6 flex-1 flex flex-col">
+                                <div class="text-brand-cyan font-black text-3xl opacity-30 mb-2">03</div>
+                                <h3 class="text-lg font-black text-brand-navy mb-3">専用ツールの構築</h3>
+                                <p class="text-xs text-slate-600 mb-4 font-medium flex-1">検証結果をもとに、貴社の業務に特化した無駄のない実用的な自社専用AIを構築します。</p>
+                                <div class="mt-auto pt-4 border-t border-slate-100">
+                                    <span class="text-[10px] text-brand-cyan font-bold block mb-1">得られる価値</span>
+                                    <p class="text-sm font-black text-brand-navy leading-tight">ルーチン業務の削減と<br>生産性の飛躍</p>
                                 </div>
                             </div>
-                            <div class="mt-auto bg-gradient-to-br from-brand-cyan/10 to-brand-light p-5 rounded-xl border border-brand-cyan/30 relative overflow-hidden group-hover:shadow-glow transition-all duration-300">
-                                <div class="absolute top-0 right-0 w-24 h-24 bg-brand-cyan/20 rounded-full blur-xl -translate-y-1/2 translate-x-1/2"></div>
-                                <span class="flex items-center gap-1.5 text-brand-cyan font-black text-[10px] tracking-widest uppercase mb-2">
-                                    <i data-lucide="rocket" class="w-3.5 h-3.5"></i>
-                                    導入効果・得られる価値
-                                </span>
-                                <p class="text-brand-navy font-black text-base leading-snug">
-                                    日々のルーチン業務時間が半減し、<br><span class="text-brand-cyan border-b-2 border-brand-cyan/30">付加価値の高い創造的な仕事</span>に集中できる。
-                                </p>
-                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="group clean-card overflow-hidden reveal delay-100 flex flex-col">
-                        <div class="h-48 relative overflow-hidden bg-brand-navy">
-                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Support" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-brand-navy/60 group-hover:bg-brand-navy/40 transition-colors duration-500"></div>
-                            <div class="absolute top-4 left-5 text-white font-black text-5xl opacity-90 drop-shadow-lg">04</div>
-                            <div class="absolute bottom-4 left-5 text-white font-bold text-[10px] tracking-[0.3em] uppercase opacity-70">Support</div>
-                        </div>
-                        <div class="p-6 md:p-8 flex-1 flex flex-col">
-                            <h3 class="text-xl font-black text-brand-navy mb-3">伴走・定着化サポート</h3>
-                            <p class="text-sm text-slate-600 mb-5 leading-relaxed font-medium">「作って終わり」ではなく、社員の皆様がAIを楽しく使いこなし、自ら改善していけるような組織づくりをサポートします。</p>
-                            <div class="mb-6 space-y-2">
-                                <div class="flex items-start gap-2">
-                                    <i data-lucide="check" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5 font-bold"></i>
-                                    <span class="text-xs font-bold text-slate-700">月額制 AIヘルプデスク・活用相談</span>
+                        
+                        <!-- Step 4 -->
+                        <div class="group bg-white border-2 border-brand-cyan/20 rounded-2xl overflow-hidden reveal delay-300 hover:border-brand-cyan hover:shadow-hover transition-all flex flex-col h-full relative">
+                            <div class="p-6 flex-1 flex flex-col bg-brand-cyan/5">
+                                <div class="text-brand-cyan font-black text-3xl opacity-80 mb-2">04</div>
+                                <h3 class="text-lg font-black text-brand-navy mb-3">伴走・定着化</h3>
+                                <p class="text-xs text-slate-600 mb-4 font-medium flex-1">導入後もヘルプデスクや教育支援を行い、社員自らがAIを活用し改善できる組織へ導きます。</p>
+                                <div class="mt-auto pt-4 border-t border-brand-cyan/20">
+                                    <span class="text-[10px] text-brand-cyan font-bold block mb-1">得られる価値</span>
+                                    <p class="text-sm font-black text-brand-navy leading-tight">自走できる<br>DX人材の育成</p>
                                 </div>
-                                <div class="flex items-start gap-2">
-                                    <i data-lucide="check" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5 font-bold"></i>
-                                    <span class="text-xs font-bold text-slate-700">社内「AI推進リーダー」の育成</span>
-                                </div>
-                            </div>
-                            <div class="mt-auto bg-gradient-to-br from-brand-cyan/10 to-brand-light p-5 rounded-xl border border-brand-cyan/30 relative overflow-hidden group-hover:shadow-glow transition-all duration-300">
-                                <div class="absolute top-0 right-0 w-24 h-24 bg-brand-cyan/20 rounded-full blur-xl -translate-y-1/2 translate-x-1/2"></div>
-                                <span class="flex items-center gap-1.5 text-brand-cyan font-black text-[10px] tracking-widest uppercase mb-2">
-                                    <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
-                                    導入効果・得られる価値
-                                </span>
-                                <p class="text-brand-navy font-black text-base leading-snug">
-                                    システム導入で終わらず、社内に<br>「<span class="text-brand-cyan border-b-2 border-brand-cyan/30">AIを使いこなし、自走できる人材</span>」が育つ。
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -582,53 +526,51 @@
             </div>
         </section>
 
+        <!-- 改善⑨：抽象度を上げ、資料請求へ促す -->
         <section id="usecases" class="py-20 md:py-24 bg-brand-navy text-white relative overflow-hidden">
             <div class="absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[800px] bg-brand-blue/20 rounded-full blur-[120px] pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="mb-12 md:mb-16 reveal text-center md:text-left">
                     <span class="text-brand-cyan font-bold tracking-widest text-xs uppercase mb-3 block">Use Cases</span>
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-black mb-5 text-white">製造業・商社におけるAI解決事例</h2>
-                    <p class="text-base text-slate-300 leading-relaxed max-w-2xl mx-auto md:mx-0 font-medium">
-                        東海地方で主流となる産業において、AIがどのように現場の課題を解決しているのか。一般的な導入イメージと、当社のサービスステップが活きるポイントをご紹介します。
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-black mb-5 text-white break-keep">AIを活用した課題解決の形</h2>
+                    <p class="text-base text-slate-300 leading-relaxed max-w-2xl mx-auto md:mx-0 font-medium break-keep">
+                        AIは魔法ではありませんが、正しいステップで導入すれば確実な成果を生み出します。<br class="hidden lg:block">私たちが伴走支援することで実現した、代表的な変革と<strong class="text-brand-cyan font-black text-lg inline-block">圧倒的な成果</strong>をご紹介します。
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                     <div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-colors reveal">
                         <div class="p-6 md:p-8">
-                            <div class="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
-                                <div>
-                                    <h3 class="text-xl font-black mb-2 flex items-center gap-3">
-                                        <span class="w-10 h-10 bg-brand-cyan/20 rounded-lg flex items-center justify-center text-brand-cyan shrink-0">
-                                            <i data-lucide="factory" class="w-5 h-5"></i>
-                                        </span>
-                                        目視検査の自動化
-                                    </h3>
-                                    <p class="text-xs text-brand-cyan font-black tracking-wide">対象企業イメージ：自動車部品メーカー</p>
-                                </div>
-                            </div>
+                            <h3 class="text-xl font-black mb-4 flex items-center gap-3 break-keep">
+                                <span class="w-10 h-10 bg-brand-cyan/20 rounded-lg flex items-center justify-center text-brand-cyan shrink-0">
+                                    <i data-lucide="cpu" class="w-5 h-5"></i>
+                                </span>
+                                現場作業のAI代替・自動化
+                            </h3>
                             <div class="space-y-4">
-                                <div class="bg-black/40 p-5 rounded-xl border border-white/5">
-                                    <span class="block text-slate-400 mb-2 text-[10px] font-black tracking-widest uppercase">課題と解決プロセス</span>
-                                    <p class="text-slate-200 text-sm leading-relaxed mb-2">
-                                        目視検査の負担が大きく、ヒューマンエラーが課題に。いきなり高額な専用装置を入れるのではなく、まずは市販のWebカメラを用いた<span class="text-brand-cyan font-bold">「スモールスタート」</span>で判定精度を検証。
+                                <div class="space-y-3">
+                                    <p class="text-slate-300 text-sm leading-relaxed break-keep">
+                                        検査、データ入力、図面の照合など、これまで<strong class="text-white inline-block">「人間が時間をかけて目視・確認していた作業」</strong>をAIに任せます。
                                     </p>
-                                    <p class="text-slate-200 text-sm leading-relaxed">
-                                        現場で「使える」確証を得た後、ラインに合わせた<span class="text-brand-cyan font-bold">「現場特化型システム」</span>として本格導入しました。
+                                    <p class="text-slate-300 text-sm leading-relaxed break-keep">
+                                        いきなり大掛かりなシステムを入れるのではなく、市販のカメラやツールを使ったスモールスタートで精度を検証してから現場に実装します。
                                     </p>
                                 </div>
-                                <div class="bg-brand-cyan/10 p-5 rounded-xl border border-brand-cyan/20">
-                                    <div class="flex items-start gap-3 mb-3">
-                                        <div class="w-5 h-5 rounded-full bg-brand-cyan text-brand-navy flex items-center justify-center flex-shrink-0 mt-0.5">
-                                            <i data-lucide="check" class="w-3 h-3 font-black"></i>
+                                <div class="bg-brand-cyan/10 p-5 rounded-xl border border-brand-cyan/20 mt-4">
+                                    <p class="text-white text-sm font-bold mb-3 border-b border-brand-cyan/30 pb-2 flex items-center gap-2">
+                                        <i data-lucide="trending-down" class="w-4 h-4 text-brand-cyan"></i>
+                                        導入後の圧倒的な成果
+                                    </p>
+                                    <div class="flex flex-col sm:flex-row gap-3">
+                                        <div class="flex-1 bg-brand-navy/60 p-4 rounded-lg text-center border border-brand-cyan/30 shadow-inner">
+                                            <span class="text-brand-cyan text-xs font-bold block mb-1">検査・確認時間</span>
+                                            <span class="text-3xl font-black text-white">66<span class="text-sm font-bold ml-1">%削減</span></span>
                                         </div>
-                                        <p class="text-white text-sm font-bold leading-relaxed">検査員を最適化し、心理的負担を大幅に軽減することに成功。</p>
-                                    </div>
-                                    <!-- 定量的な数字ハイライト -->
-                                    <div class="flex flex-wrap gap-2 ml-8">
-                                        <span class="bg-brand-cyan/20 text-brand-cyan text-[11px] font-black px-2.5 py-1 rounded border border-brand-cyan/30">検査時間 1/3に短縮(例)</span>
-                                        <span class="bg-brand-cyan/20 text-brand-cyan text-[11px] font-black px-2.5 py-1 rounded border border-brand-cyan/30">見逃しエラー 0.1%未満へ(例)</span>
+                                        <div class="flex-1 bg-brand-navy/60 p-4 rounded-lg text-center border border-brand-cyan/30 shadow-inner">
+                                            <span class="text-brand-cyan text-xs font-bold block mb-1">見逃しエラー</span>
+                                            <span class="text-3xl font-black text-white text-shadow-glow">ゼロ<span class="text-sm font-bold ml-1">へ</span></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -637,67 +579,134 @@
 
                     <div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-colors reveal delay-100">
                         <div class="p-6 md:p-8">
-                            <div class="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
-                                <div>
-                                    <h3 class="text-xl font-black mb-2 flex items-center gap-3">
-                                        <span class="w-10 h-10 bg-brand-cyan/20 rounded-lg flex items-center justify-center text-brand-cyan shrink-0">
-                                            <i data-lucide="building-2" class="w-5 h-5"></i>
-                                        </span>
-                                        社内ナレッジの共有化
-                                    </h3>
-                                    <p class="text-xs text-brand-cyan font-black tracking-wide">対象企業イメージ：機械専門商社 / 製造業</p>
-                                </div>
-                            </div>
+                            <h3 class="text-xl font-black mb-4 flex items-center gap-3 break-keep">
+                                <span class="w-10 h-10 bg-brand-cyan/20 rounded-lg flex items-center justify-center text-brand-cyan shrink-0">
+                                    <i data-lucide="database" class="w-5 h-5"></i>
+                                </span>
+                                属人的ノウハウのデジタル資産化
+                            </h3>
                             <div class="space-y-4">
-                                <div class="bg-black/40 p-5 rounded-xl border border-white/5">
-                                    <span class="block text-slate-400 mb-2 text-[10px] font-black tracking-widest uppercase">課題と解決プロセス</span>
-                                    <p class="text-slate-200 text-sm leading-relaxed mb-2">
-                                        過去の図面や見積りの仕様確認がベテランに集中し若手が育たない。<span class="text-brand-cyan font-bold">「アセスメント」</span>で必要なデータを洗い出し、社内資料を学習させた専用AIアシスタントを構築。
+                                <div class="space-y-3">
+                                    <p class="text-slate-300 text-sm leading-relaxed break-keep">
+                                        「あのベテランに聞かないと分からない」といった<strong class="text-white inline-block">組織の暗黙知や過去の膨大な資料</strong>をAIに学習させ、専用のアシスタントを構築します。
                                     </p>
-                                    <p class="text-slate-200 text-sm leading-relaxed">
-                                        並行して<span class="text-brand-cyan font-bold">「定着化サポート」</span>を行い、若手が自分でAIに聞きながら業務を進める習慣を作りました。
+                                    <p class="text-slate-300 text-sm leading-relaxed break-keep">
+                                        若手社員がスマホやPCから簡単に知識を引き出せるようになり、教育コストの削減と業務の標準化を実現します。
                                     </p>
                                 </div>
-                                <div class="bg-brand-cyan/10 p-5 rounded-xl border border-brand-cyan/20">
-                                    <div class="flex items-start gap-3 mb-3">
-                                        <div class="w-5 h-5 rounded-full bg-brand-cyan text-brand-navy flex items-center justify-center flex-shrink-0 mt-0.5">
-                                            <i data-lucide="check" class="w-3 h-3 font-black"></i>
+                                <div class="bg-brand-cyan/10 p-5 rounded-xl border border-brand-cyan/20 mt-4">
+                                    <p class="text-white text-sm font-bold mb-3 border-b border-brand-cyan/30 pb-2 flex items-center gap-2">
+                                        <i data-lucide="clock" class="w-4 h-4 text-brand-cyan"></i>
+                                        導入後の圧倒的な成果
+                                    </p>
+                                    <div class="flex flex-col sm:flex-row gap-3">
+                                        <div class="flex-1 bg-brand-navy/60 p-4 rounded-lg text-center border border-brand-cyan/30 shadow-inner">
+                                            <span class="text-brand-cyan text-xs font-bold block mb-1">情報検索時間</span>
+                                            <span class="text-2xl font-black text-white">1回15<span class="text-sm font-bold ml-1">分短縮</span></span>
                                         </div>
-                                        <p class="text-white text-sm font-bold leading-relaxed">若手営業が現場からスマホで即座に検索可能になり、ベテランへの確認作業を大幅に削減。</p>
-                                    </div>
-                                    <!-- 定量的な数字ハイライト -->
-                                    <div class="flex flex-wrap gap-2 ml-8">
-                                        <span class="bg-brand-cyan/20 text-brand-cyan text-[11px] font-black px-2.5 py-1 rounded border border-brand-cyan/30">検索時間 1回15分短縮(例)</span>
-                                        <span class="bg-brand-cyan/20 text-brand-cyan text-[11px] font-black px-2.5 py-1 rounded border border-brand-cyan/30">確認作業 月間40時間削減(例)</span>
+                                        <div class="flex-1 bg-brand-navy/60 p-4 rounded-lg text-center border border-brand-cyan/30 shadow-inner">
+                                            <span class="text-brand-cyan text-xs font-bold block mb-1">月間創出時間</span>
+                                            <span class="text-3xl font-black text-white">40<span class="text-sm font-bold ml-1">時間以上</span></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- 資料請求への導線 -->
+                <div class="text-center reveal">
+                    <p class="text-slate-300 mb-6 font-medium">より具体的な「業界別のケーススタディ」や「導入シミュレーション」をご用意しております。</p>
+                    <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 border-2 border-brand-cyan text-base font-black rounded-xl text-white hover:bg-brand-cyan transition-all group">
+                        <i data-lucide="file-text" class="w-5 h-5 mr-2"></i>
+                        具体的な導入事例・資料を請求する
+                        <i data-lucide="arrow-right" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <!-- 選ばれる理由 -->
+        <!-- 改善⑩：スマホ閲覧時の比較表の最適化 -->
         <section id="strengths" class="py-20 md:py-24 bg-brand-light">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-4xl mx-auto mb-12 reveal">
                     <span class="text-brand-cyan font-bold tracking-widest text-xs uppercase mb-3 block">Why Choose AICHI</span>
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-black text-brand-navy mb-8">東海の中小企業が<br class="hidden sm:block">私たちを選ぶ理由</h2>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-black text-brand-navy mb-8 break-keep">東海の中小企業が<br class="md:hidden">私たちを選ぶ理由</h2>
                     
-                    <p class="text-lg md:text-xl text-slate-800 font-bold leading-relaxed">
-                        大手ベンダーには真似できない、<br class="sm:hidden">
+                    <p class="text-lg md:text-xl text-slate-800 font-bold leading-relaxed break-keep">
+                        大手ベンダーには真似できない、<br>
                         <span class="relative inline-block">
                             地元ならではの機動力と現場への深い入り込み
                             <span class="absolute bottom-1 left-0 w-full h-2 bg-brand-cyan/20 -z-10 rounded-sm"></span>
-                        </span>。<br>
-                        それが成功への<span class="text-brand-cyan">最短ルート</span>です。
+                        </span>。
+                        それが成功への<span class="text-brand-cyan inline-block">最短ルート</span>です。
                     </p>
                 </div>
 
-                <!-- 比較グリッド -->
-                <div class="reveal overflow-hidden mb-10">
-                    <div class="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+                <!-- スマホ用 カード型比較UI (md:hidden) -->
+                <div class="md:hidden space-y-6 reveal">
+                    <!-- 自社 (一番上に目立たせる) -->
+                    <div class="bg-white border-2 border-brand-cyan rounded-2xl p-6 shadow-premium relative">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-cyan text-white text-[10px] font-black px-4 py-1 rounded-full shadow-glow whitespace-nowrap tracking-widest">
+                            BEST CHOICE
+                        </div>
+                        <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                            <div class="w-12 h-12 bg-brand-cyan/10 rounded-full flex items-center justify-center shrink-0">
+                                <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 4L4 36H11L20 18L29 36H36L20 4Z" fill="#061224" />
+                                    <path d="M13 26H27V30H13V26Z" fill="#0EA5E9" />
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-black text-brand-cyan uppercase tracking-wider block">弊社コンサルティング</span>
+                                <h3 class="text-lg font-black text-brand-navy">AICHI CONSULTING</h3>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex justify-between items-center"><span class="text-slate-500 font-bold text-xs">主な対象</span><span class="font-black text-brand-navy">愛知・東海の中堅・中小</span></li>
+                            <li class="flex justify-between items-center"><span class="text-slate-500 font-bold text-xs">コスト</span><span class="font-black text-brand-cyan">初期抑止・月額プラン</span></li>
+                            <li class="flex justify-between items-center"><span class="text-slate-500 font-bold text-xs">提案スタンス</span><span class="font-black text-brand-navy">現場の「使い勝手」最優先</span></li>
+                            <li class="flex justify-between items-center"><span class="text-slate-500 font-bold text-xs">導入後支援</span><span class="font-black text-brand-cyan">徹底伴走・DX人材育成</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- 他社比較 -->
+                    <div class="grid grid-cols-1 gap-4">
+                        <!-- 大手 -->
+                        <div class="bg-white/60 border border-slate-200 rounded-xl p-5">
+                            <div class="flex items-center gap-3 mb-3 pb-3 border-b border-slate-100">
+                                <div class="w-8 h-8 bg-slate-100 rounded-md flex items-center justify-center text-slate-400 shrink-0">
+                                    <i data-lucide="building" class="w-4 h-4"></i>
+                                </div>
+                                <h3 class="text-base font-black text-slate-700">大手ベンダーの場合</h3>
+                            </div>
+                            <ul class="space-y-2 text-xs">
+                                <li class="flex justify-between"><span class="text-slate-400 font-bold">主な対象</span><span class="font-bold text-slate-600">大企業中心</span></li>
+                                <li class="flex justify-between"><span class="text-slate-400 font-bold">コスト</span><span class="font-bold text-slate-600">超高額 (数千万〜)</span></li>
+                                <li class="flex justify-between"><span class="text-slate-400 font-bold">スタンス</span><span class="font-bold text-slate-600">要件定義重視</span></li>
+                            </ul>
+                        </div>
+                        <!-- スタートアップ -->
+                        <div class="bg-white/60 border border-slate-200 rounded-xl p-5">
+                            <div class="flex items-center gap-3 mb-3 pb-3 border-b border-slate-100">
+                                <div class="w-8 h-8 bg-slate-100 rounded-md flex items-center justify-center text-slate-400 shrink-0">
+                                    <i data-lucide="rocket" class="w-4 h-4"></i>
+                                </div>
+                                <h3 class="text-base font-black text-slate-700">AIスタートアップの場合</h3>
+                            </div>
+                            <ul class="space-y-2 text-xs">
+                                <li class="flex justify-between"><span class="text-slate-400 font-bold">主な対象</span><span class="font-bold text-slate-600">特定の先端企業</span></li>
+                                <li class="flex justify-between"><span class="text-slate-400 font-bold">コスト</span><span class="font-bold text-slate-600">比較的安価 (開発のみ)</span></li>
+                                <li class="flex justify-between"><span class="text-slate-400 font-bold">スタンス</span><span class="font-bold text-slate-600">最新技術重視</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PC用 テーブル型比較UI (hidden md:block) -->
+                <div class="hidden md:block reveal overflow-hidden mb-10">
+                    <div class="overflow-x-auto px-4 sm:px-0">
                         <div class="min-w-[800px] flex gap-4 items-stretch py-6">
                             
                             <!-- 特徴ラベル（左側） -->
@@ -797,6 +806,7 @@
             </div>
         </section>
 
+        <!-- 改善⑪：地元の専門家であることを強調 -->
         <section id="contact" class="py-20 md:py-24 relative bg-brand-navy text-white overflow-hidden">
             <div class="absolute inset-0 z-0">
                 <div class="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy to-brand-blue opacity-95"></div>
@@ -807,14 +817,32 @@
                     <i data-lucide="mail" class="w-6 h-6 text-brand-cyan"></i>
                 </div>
                 
-                <h2 class="text-2xl md:text-3xl lg:text-4xl font-black mb-6 leading-tight text-white tracking-tight">
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-black mb-6 leading-tight text-white tracking-tight break-keep">
                     「AI、うちの会社でも使える？」<br>
-                    <span class="text-brand-cyan">そんな漠然としたご相談から</span>大歓迎です
+                    <span class="text-brand-cyan inline-block">そんな漠然としたご相談から</span>大歓迎です
                 </h2>
                 
-                <p class="text-base md:text-lg text-slate-300 mb-10 max-w-xl mx-auto font-medium">
-                    「何に困っているかうまく説明できない」「何から手をつければいいか分からない」という状態のままで構いません。専門用語は一切使わず、地元の専門家が丁寧にお話を伺います。
+                <p class="text-base md:text-lg text-slate-300 mb-8 max-w-xl mx-auto font-medium leading-relaxed break-keep">
+                    「何に困っているかうまく説明できない」「何から手をつければいいか分からない」という状態のままで構いません。<br class="hidden md:block">専門用語は一切使わず、現場目線で丁寧にお話を伺います。
                 </p>
+
+                <!-- 改善⑪：「地元」を視覚的に美しい発光ブロックとして強調しつつ、全国対応もアピール -->
+                <div class="max-w-lg mx-auto mb-12 relative group cursor-default">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-cyan to-brand-blue rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+                    <div class="relative bg-[#0a1930] border border-white/10 rounded-xl p-5 md:p-6 flex flex-col sm:flex-row items-center gap-4 justify-center shadow-2xl">
+                        <div class="w-14 h-14 bg-brand-cyan/20 rounded-full flex items-center justify-center shrink-0 border border-brand-cyan/30">
+                            <i data-lucide="handshake" class="w-6 h-6 text-brand-cyan animate-bounce-subtle"></i>
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <div class="flex items-center justify-center sm:justify-start gap-2 mb-1">
+                                <span class="text-[10px] font-black text-brand-cyan tracking-[0.2em] uppercase">Local Partner</span>
+                                <span class="text-[9px] font-bold text-white/70 bg-white/10 px-2 py-0.5 rounded-full border border-white/10">オンラインで全国対応</span>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black text-white tracking-tight">愛知・東海発のAIパートナー</h3>
+                            <p class="text-xs md:text-sm font-bold text-slate-300 mt-1">が直接対応・伴走します</p>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="bg-white p-6 md:p-10 lg:p-12 rounded-2xl shadow-2xl text-left max-w-xl mx-auto border border-slate-100">
                     <form class="space-y-5 md:space-y-6 text-slate-800">
@@ -827,11 +855,11 @@
                             <input type="email" id="email" class="w-full px-4 py-3 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-cyan focus:border-brand-cyan outline-none transition-shadow font-medium" placeholder="info@example.com">
                         </div>
                         <div>
-                            <label for="message" class="block text-sm font-black text-slate-700 mb-2 tracking-wide text-shadow-none">ご相談内容（任意）</label>
-                            <textarea id="message" rows="4" class="w-full px-4 py-3 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-cyan focus:border-brand-cyan outline-none transition-shadow font-medium" placeholder="現場の属人化に悩んでいる、等"></textarea>
+                            <label for="message" class="block text-sm font-black text-slate-700 mb-2 tracking-wide text-shadow-none">ご相談内容・資料請求（任意）</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-cyan focus:border-brand-cyan outline-none transition-shadow font-medium" placeholder="具体的な導入事例の資料が欲しい、現場の属人化に悩んでいる、等"></textarea>
                         </div>
                         <button type="button" class="w-full flex justify-center py-3 md:py-4 px-6 border border-transparent rounded-lg shadow-glow text-base font-black text-white bg-brand-cyan hover:bg-brand-blue transition-all mt-4">
-                            無料相談を申し込む
+                            無料相談・資料請求を申し込む
                         </button>
                         <p class="text-xs text-center text-slate-500 mt-5 font-bold flex items-center justify-center gap-1.5">
                             <i data-lucide="shield-check" class="w-4 h-4 text-brand-cyan"></i>
@@ -873,24 +901,30 @@
         </div>
     </footer>
 
-    <!-- フローティング追従ボタン (課題共感型デザイン) -->
+    <!-- フローティング追従ボタン -->
     <a href="./service.html" class="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 bg-gradient-to-r from-brand-cyan to-brand-blue text-white p-3 md:p-4 rounded-2xl shadow-[0_10px_40px_-10px_rgba(14,165,233,0.8)] hover:shadow-[0_10px_50px_-5px_rgba(14,165,233,1)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-3 border border-white/20 group max-w-[calc(100vw-2rem)] md:max-w-md animate-bounce-subtle">
         <div class="relative flex items-center justify-center shrink-0 hidden sm:flex">
             <span class="absolute flex h-full w-full">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-40"></span>
             </span>
             <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                <i data-lucide="lightbulb" class="w-5 h-5 text-yellow-300"></i>
+                <!-- SVG Icon: Signal bars turning into AI star -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="14" width="3" height="6" rx="1" fill="#fef3c7"/>
+                    <rect x="8" y="10" width="3" height="10" rx="1" fill="#fcd34d"/>
+                    <rect x="13" y="6" width="3" height="14" rx="1" fill="#fbbf24"/>
+                    <path d="M18 2L20 6L24 8L20 10L18 14L16 10L12 8L16 6L18 2Z" fill="#fde047"/>
+                </svg>
             </div>
         </div>
         <div class="flex flex-col items-start pr-1">
-            <span class="text-[10px] md:text-xs font-bold text-cyan-100 mb-1 flex items-center tracking-wider">
+            <span class="text-[10px] md:text-[11px] font-bold text-cyan-100 mb-1 flex items-center tracking-wider">
                 <span class="bg-red-500 text-white px-1.5 py-0.5 rounded text-[8px] mr-1.5 animate-pulse font-black leading-none shrink-0 sm:hidden">NEW</span>
-                「DX・IT導入、何から始めれば…」とお悩みなら
+                現場診断からAI処方へ
             </span>
             <span class="text-xs sm:text-sm md:text-base font-black leading-snug group-hover:text-white transition-colors">
-                失敗しないIT投資は<br class="sm:hidden">「業務フローの可視化」から！
-                <span class="inline-flex items-center ml-1 text-cyan-200 text-[10px] md:text-xs bg-black/20 px-2 py-0.5 rounded-full group-hover:bg-white group-hover:text-brand-blue transition-colors whitespace-nowrap">
+                <span class="text-white">現場</span><span class="text-yellow-200 italic">AI</span><span class="text-cyan-100">カルテ</span>
+                <span class="inline-flex items-center ml-1 text-cyan-200 text-[10px] md:text-xs bg-black/20 px-2 py-0.5 rounded-full group-hover:bg-white group-hover:text-brand-blue transition-colors whitespace-nowrap mt-1 lg:mt-0 align-middle">
                     詳細へ <i data-lucide="chevron-right" class="w-3 h-3 ml-0.5"></i>
                 </span>
             </span>
@@ -901,8 +935,6 @@
         lucide.createIcons();
 
         document.addEventListener('DOMContentLoaded', () => {
-
-            // スクロール時のアニメーション
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -913,7 +945,6 @@
 
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-            // ナビゲーションのスクロール制御
             const navbar = document.getElementById('navbar');
             const logoText = document.getElementById('logo-text');
             const logoSubtext = document.getElementById('logo-subtext');
